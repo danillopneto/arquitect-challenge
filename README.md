@@ -5,7 +5,7 @@ Desafio para vaga de arquiteto
 Você deverá construir um sistema capaz de receber milhares de eventos por segundo. Um evento é definido pelo seguinte contrato (JSON):
 ```javascript
 {
-   "timestamp":"<Unix Timestamp>",
+   "timestamp":<Unix Timestamp ex: 1539112021301>,
    "tag": "<string separada por '.' ex: brasil.sudeste.datacenter1.cpu0 >",
    "valor" : "<string>"
 }
