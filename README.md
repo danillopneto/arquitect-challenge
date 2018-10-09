@@ -16,6 +16,8 @@ O seu programa deverá ser capaz de receber e armazenar eventos;
 
 Será passado apenas 1 evento por vez;
 
+Cada evento poderá ter o estado Processado ou Erro: Caso o campo valor chegue vazio o status do Evento será Erro caso contrário Processado;
+
 Sua API deverá apresentar métricas sobre o volume de eventos recebidos por hora;
 
 A visualização de dados deverão ser feitas através de gráficos apenas para os eventos com valor numérico e tabela para todos os dados recebidos;
@@ -26,6 +28,10 @@ A visualização deverá ser realtime;
 
 Sua solução deverá permitir consultas baseadas no prefixo da tag, exemplo: tag=brasil.sudeste.datacenter01.cpu0 deve suportar chave de consulta por brasil.sudeste.*
 
+Sua solução deverá suportar consultas temporais baseada no timestamp do evento;
+
 No seu README, você deverá fazer uma explicação sobre a solução encontrada, tecnologias envolvidas, instrução de uso da solução.
 
 Desejável, todo o processo de build e subida deverão ser automatizados com make ou ferramenta similar.
+
+Sua solução deverá ser desenvolvida em dotnet core 2.1+, além disso, a solução deverá ser disponibilizada através de containers (Docker)
