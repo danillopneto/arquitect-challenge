@@ -3,12 +3,13 @@
 Desafio para vaga de arquiteto
 
 Você deverá construir um sistema capaz de receber milhares de eventos por segundo. Um evento é definido pelo seguinte contrato (JSON):
+```javascript
 {
    "timestamp":"<Unix Timestamp>",
    "tag": "<string separada por '.' ex: brasil.sudeste.datacenter1.cpu0 >",
    "valor" : "<string>"
 }
-
+```
 O campo timestamp é quando o evento ocorreu, a tag é o identificador do evento e o valor é o dado coletado de um determinado sensor, esses dados podem ser númericos ou string.
 
 O seu programa deverá ser capaz de receber e armazenar eventos.
