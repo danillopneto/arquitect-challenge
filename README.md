@@ -1,6 +1,6 @@
-# architect-challenge
+# Desafio para vaga de arquiteto
 
-Desafio para vaga de arquiteto
+## Contexto e descrição
 
 Você deverá construir um sistema capaz de receber milhares de eventos por segundo. Um evento é definido pelo seguinte contrato (JSON):
 ```javascript
@@ -30,16 +30,10 @@ Sua solução deverá permitir consultas baseadas no prefixo da tag, exemplo: ta
 
 Sua solução deverá suportar consultas temporais baseada no timestamp do evento;
 
-No seu README, você deverá fazer uma explicação sobre a solução encontrada, tecnologias envolvidas, instrução de uso da solução.
-
-Desejável, todo o processo de build e subida deverão ser automatizados com make ou ferramenta similar.
+## Requisitos técnicos
 
 Sua solução deverá ser desenvolvida em dotnet core 2.1+, além disso, a solução deverá ser disponibilizada através de containers (Docker)
 
-Como enviar o desafio:
+Desejável, todo o processo de build e subida deverão ser automatizados com make ou ferramenta similar.
 
-1) Criar uma conta gratuita no Gitlab.com
-2) Criar um Repositorio privado Git
-3) Adicionar o seu desafio ao repositório, não se esqueça de fazer o push!
-4) Dar acesso de leitura para o usuário radix.recruit 
-5) Quando estiver tudo pronto nos mande um email com o link do seu repositório
+No seu README, você deverá fazer uma explicação sobre a solução encontrada, tecnologias envolvidas, instrução de uso da solução.
