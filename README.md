@@ -35,3 +35,11 @@ No seu README, você deverá fazer uma explicação sobre a solução encontrada
 Desejável, todo o processo de build e subida deverão ser automatizados com make ou ferramenta similar.
 
 Sua solução deverá ser desenvolvida em dotnet core 2.1+, além disso, a solução deverá ser disponibilizada através de containers (Docker)
+
+Como enviar o desafio:
+
+1) Criar uma conta gratuita no Gitlab.com
+2) Criar um Repositorio privado Git
+3) Adicionar o seu desafio ao repositório, não se esqueça de fazer o push!
+4) Dar acesso de leitura para o usuário radix.recruit 
+5) Quando estiver tudo pronto nos mande um email com o link do seu repositório
