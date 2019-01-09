@@ -1,39 +1,66 @@
 # Desafio para vaga de arquiteto
 
-## Contexto e descrição
+## Considerações Gerais
 
-Você deverá construir um sistema capaz de receber milhares de eventos por segundo. Um evento é definido pelo seguinte contrato (JSON):
-```javascript
+* Sua solução deverá ser desenvolvida em dotnet core 2.1+.
+
+* Devemos ser capazes de executar sua solução em uma VM limpa, com scripts de automatização de tarefas como Make, Shell Script ou similares. Esses scripts devem ser suficientes para rodarmos sua solução.
+
+* Considere que já temos o seguinte ambiente:
+    * Windows 10 Professional
+    * Ubuntu 18.0.4
+    * .NET Core 2.1
+
+* No seu README, você deverá fazer uma explicação sobre a solução encontrada, tecnologias envolvidas e instrução de uso da solução. 
+
+* É interessante que você também registre ideias que gostaria de implementar caso tivesse mais tempo.
+
+## Problema
+
+Imagine que você ficou responsável por construir um sistema que seja capaz de receber milhares de eventos por segundo de sensores espalhados pelo Brasil, nas regiões norte, nordeste, sudeste e sul. Seu cliente também deseja que na solução ele possa visualizar esses eventos de forma clara.
+
+Um evento é defino por um JSON com o seguinte formato:
+
+```json
 {
-   "timestamp":<Unix Timestamp ex: 1539112021301>,
-   "tag": "<string separada por '.' ex: brasil.sudeste.datacenter1.cpu0 >",
+   "timestamp": <Unix Timestamp ex: 1539112021301>,
+   "tag": "<string separada por '.' ex: brasil.sudeste.sensor01 >",
    "valor" : "<string>"
 }
 ```
-O campo timestamp é quando o evento ocorreu, a tag é o identificador do evento e o valor é o dado coletado de um determinado sensor, esses dados podem ser númericos ou string.
 
-O seu programa deverá ser capaz de receber e armazenar eventos;
+Descrição:
+ * O campo timestamp é quando o evento ocorreu em UNIX Timestamp.
+ * Tag é o identificador do evento, sendo composto de pais.região.nome_sensor.
+ * Valor é o dado coletado de um determinado sensor (podendo ser numérico ou string).
 
-Será passado apenas 1 evento por vez;
+## Requisitos
 
-Cada evento poderá ter o estado Processado ou Erro: Caso o campo valor chegue vazio o status do Evento será Erro caso contrário Processado;
+* Sua solução deverá ser capaz de armazenar os eventos recebidos.
 
-Sua API deverá apresentar métricas sobre o volume de eventos recebidos por hora;
+* Considere um número de inserções de 1000 eventos/sec. Cada sensor envia um evento a cada segundo independente se seu valor foi alterado, então um sensor pode enviar um evento com o mesmo valor do segundo anterior.
 
-A visualização de dados deverão ser feitas através de gráficos apenas para os eventos com valor numérico e tabela para todos os dados recebidos;
+* Cada evento poderá ter o estado processado ou erro, caso o campo valor chegue vazio, o status do evento será erro caso contrário processado.
 
-Seu projeto deverá ter a possibilidade fazer o somatório acumulativo para eventos com valor numérico;
+* Sua API deverá apresentar métricas sobre o volume de eventos recebidos por hora.
 
-A visualização deverá ser realtime;
+* Para visualização desses dados, sua solução deve possuir:
+    * Uma tabela que mostre todos os eventos recebidos. Essa tabela deve ser atualizada automaticamente.
+    * Um gráfico apenas para eventos com valor numérico.
 
-Sua solução deverá permitir consultas baseadas no prefixo da tag, exemplo: tag=brasil.sudeste.datacenter01.cpu0 deve suportar chave de consulta por brasil.sudeste.*
+* Para seu cliente, é muito importante que ele saiba o número de eventos que aconteceram por região e por sensor. Como no exemplo abaixo:
+    * Região sudeste e sul ambas com dois sensores (sensor01 e sensor02):
+        * brasil.sudeste - 1000
+        * brasil.sudeste.sensor01 - 700
+        * brasil.sudeste.sensor02 - 300
+        * brasil.sul - 1500
+        * brasil.sul.sensor01 - 1250
+        * brasil.sul.sensor02 - 250
 
-Sua solução deverá suportar consultas temporais baseada no timestamp do evento;
+## Avaliação
 
-## Requisitos técnicos
+Nossa equipe de desenvolvedores irá avaliar código, simplicidade da solução, testes unitários, arquitetura e automatização de tarefas.
 
-Sua solução deverá ser desenvolvida em dotnet core 2.1+, além disso, a solução deverá ser disponibilizada através de containers (Docker)
+Tente automatizar ao máximo sua solução. Isso porque no caso de deploy em vários servidores, não é interessante que tenhamos que entrar de máquina em máquina para instalar cada componente da solução.
 
-Desejável, todo o processo de build e subida deverão ser automatizados com make ou ferramenta similar.
-
-No seu README, você deverá fazer uma explicação sobre a solução encontrada, tecnologias envolvidas, instrução de uso da solução.
+Em caso de dúvida, entre em contato com o responsável pelo seu processo seletivo.
