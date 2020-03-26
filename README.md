@@ -4,7 +4,7 @@
 
 * Sua solução deverá ser desenvolvida em dotnet core 2.1+.
 
-* Devemos ser capazes de executar sua solução em uma VM limpa, com scripts de automatização de tarefas como Make, Shell Script ou similares. Esses scripts devem ser suficientes para rodarmos sua solução.
+* Devemos ser capazes de executar sua solução em um ambiente novo e de forma automatizada. Descrever no README como o projeto deve ser executado, requisitos de ambiente e demais informações necessárias para a execução.
 
 * Considere que já temos o seguinte ambiente:
     * Windows 10 Professional
