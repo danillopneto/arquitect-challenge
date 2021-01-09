@@ -2,3 +2,8 @@
 back-end/.Net/.vs
 back-end/.Net/ArquitectChallenge.Domain/bin
 back-end/.Net/ArquitectChallenge.Domain/obj
+back-end/.Net/ArquitectChallenge.Interfaces/bin
+back-end/.Net/ArquitectChallenge.Interfaces/obj
+back-end/.Net/ArquitectChallenge.WebAPI/bin
+back-end/.Net/ArquitectChallenge.WebAPI/obj
+back-end/.Net/ArquitectChallenge.WebAPI/ArquitectChallenge.WebAPI.csproj.user

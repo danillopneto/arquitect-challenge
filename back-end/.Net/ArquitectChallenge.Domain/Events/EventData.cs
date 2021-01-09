@@ -1,6 +1,6 @@
 ﻿namespace ArquitectChallenge.Domain.Events
 {
-    public class EventData : AbstractEvent
+    public class EventData : BaseObject
     {
         public double TimeStamp { get; set; }
 

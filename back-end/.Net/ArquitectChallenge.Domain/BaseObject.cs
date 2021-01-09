@@ -2,7 +2,7 @@
 
 namespace ArquitectChallenge.Domain
 {
-    public abstract class AbstractEvent
+    public abstract class BaseObject
     {
         public Guid Id { get; set; }
 
