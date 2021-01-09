@@ -10,17 +10,23 @@ namespace ArquitectChallenge.API.Controllers
     /// <summary>
     /// Generic API controller.
     /// </summary>
-    /// <typeparam name="T">Type of the model.</typeparam>
+    /// <typeparam name="TDto">Type of the model.</typeparam>
+    /// <typeparam name="TService">Type of the service.</typeparam>
     [ApiController]
-    public abstract class ApiController<T> : Controller where T : BaseObject
+    public abstract class ApiController<TDto, TService> : Controller 
+        where TDto : BaseObject 
+        where TService : IBaseService
     {
-        private readonly IBaseService _service;
+        /// <summary>
+        /// Service base.
+        /// </summary>
+        protected readonly TService _service;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         /// <param name="service">Service instance.</param>
-        public ApiController(IBaseService service)
+        public ApiController(TService service)
         {
             _service = service;
         }
@@ -43,7 +49,7 @@ namespace ArquitectChallenge.API.Controllers
         {
             try
             {
-                _service.DeleteById<T>(id);
+                _service.DeleteById<TDto>(id);
                 return Ok();
             }
             catch (TimeoutException)
@@ -67,11 +73,11 @@ namespace ArquitectChallenge.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public virtual ActionResult<IEnumerable<T>> Get()
+        public virtual ActionResult<IEnumerable<TDto>> Get()
         {
             try
             {
-                var result = _service.GetList<T>();
+                var result = _service.GetList<TDto>();
                 return Ok(result);
             }
             catch (TimeoutException)
@@ -97,11 +103,11 @@ namespace ArquitectChallenge.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public virtual ActionResult<T> Get(int id)
+        public virtual ActionResult<TDto> Get(int id)
         {
             try
             {
-                var result = _service.GetById<T>(id);
+                var result = _service.GetById<TDto>(id);
                 if (result == null)
                 {
                     return NotFound(new { message = "The item was not found." });
@@ -127,7 +133,7 @@ namespace ArquitectChallenge.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public virtual ActionResult Post([FromBody] T model)
+        public virtual ActionResult Post([FromBody] TDto model)
         {
             return Save(model);
         }
@@ -145,7 +151,7 @@ namespace ArquitectChallenge.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public virtual ActionResult Put(int id, [FromBody] T model)
+        public virtual ActionResult Put(int id, [FromBody] TDto model)
         {
             return Save(model);
         }
@@ -159,7 +165,7 @@ namespace ArquitectChallenge.API.Controllers
         /// </summary>
         /// <param name="model">Model to be saved.</param>
         /// <returns>Result of saving the model.</returns>
-        protected virtual ActionResult Save(T model)
+        protected virtual ActionResult Save(TDto model)
         {
             try
             {

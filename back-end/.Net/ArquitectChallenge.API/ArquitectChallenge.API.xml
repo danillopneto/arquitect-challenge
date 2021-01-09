@@ -4,19 +4,25 @@
         <name>ArquitectChallenge.API</name>
     </assembly>
     <members>
-        <member name="T:ArquitectChallenge.API.Controllers.ApiController`1">
+        <member name="T:ArquitectChallenge.API.Controllers.ApiController`2">
             <summary>
             Generic API controller.
             </summary>
-            <typeparam name="T">Type of the model.</typeparam>
+            <typeparam name="TDto">Type of the model.</typeparam>
+            <typeparam name="TService">Type of the service.</typeparam>
         </member>
-        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.#ctor(ArquitectChallenge.Interfaces.Services.IBaseService)">
+        <member name="F:ArquitectChallenge.API.Controllers.ApiController`2._service">
+            <summary>
+            Service base.
+            </summary>
+        </member>
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`2.#ctor(`1)">
             <summary>
             Default constructor.
             </summary>
             <param name="service">Service instance.</param>
         </member>
-        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Delete(System.Int32)">
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`2.Delete(System.Int32)">
             <summary>
             Delete the item from database.
             </summary>
@@ -26,7 +32,7 @@
             <response code="408">Timeout by deleting the items.</response>
             <response code="500">Internal error by deleting the product.</response>
         </member>
-        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Get">
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`2.Get">
             <summary>
             Get the list of all items.
             </summary>
@@ -35,7 +41,7 @@
             <response code="408">Timeout by getting the items.</response>
             <response code="500">Internal error by getting the items.</response>
         </member>
-        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Get(System.Int32)">
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`2.Get(System.Int32)">
             <summary>
             Get an specific item.
             </summary>
@@ -45,7 +51,7 @@
             <response code="408">Timeout by getting the items.</response>
             <response code="500">Internal error by getting the item.</response>
         </member>
-        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Post(`0)">
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`2.Post(`0)">
             <summary>
             Insert the item into database.
             </summary>
@@ -55,7 +61,7 @@
             <response code="408">Timeout by getting the items.</response>
             <response code="500">Internal error by inserting the item.</response>
         </member>
-        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Put(System.Int32,`0)">
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`2.Put(System.Int32,`0)">
             <summary>
             Update a specific item.
             </summary>
@@ -66,7 +72,7 @@
             <response code="408">Timeout by getting the items.</response>
             <response code="500">Internal error by getting the items.</response>
         </member>
-        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Save(`0)">
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`2.Save(`0)">
             <summary>
             Save the item into database.
             </summary>
@@ -83,6 +89,15 @@
             Default constructor.
             </summary>
             <param name="service">Service instance.</param>
+        </member>
+        <member name="M:ArquitectChallenge.API.Controllers.EventController.GetAllGroupedByTag">
+            <summary>
+            Get the list of events grouped by tag.
+            </summary>
+            <returns>The list of events grouped by tag.</returns>
+            <response code="200">Success by getting the items.</response>
+            <response code="408">Timeout by getting the items.</response>
+            <response code="500">Internal error by getting the items.</response>
         </member>
         <member name="M:ArquitectChallenge.API.Controllers.EventController.Save(ArquitectChallenge.Domain.Events.EventData)">
             <summary>
