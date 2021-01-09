@@ -7,11 +7,19 @@ using System.Net;
 
 namespace ArquitectChallenge.API.Controllers
 {
+    /// <summary>
+    /// Generic API controller.
+    /// </summary>
+    /// <typeparam name="T">Type of the model.</typeparam>
     [ApiController]
     public abstract class ApiController<T> : Controller where T : BaseObject
     {
         private readonly IBaseService _service;
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="service">Service instance.</param>
         public ApiController(IBaseService service)
         {
             _service = service;
@@ -137,16 +145,21 @@ namespace ArquitectChallenge.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public virtual ActionResult Put(Guid id, [FromBody] T model)
+        public virtual ActionResult Put(int id, [FromBody] T model)
         {
             return Save(model);
         }
 
         #endregion " APIS "
 
-        #region " PRIVATE METHODS "
+        #region " PROTECTED METHODS "
 
-        private ActionResult Save(T model)
+        /// <summary>
+        /// Save the item into database.
+        /// </summary>
+        /// <param name="model">Model to be saved.</param>
+        /// <returns>Result of saving the model.</returns>
+        protected virtual ActionResult Save(T model)
         {
             try
             {
@@ -163,6 +176,6 @@ namespace ArquitectChallenge.API.Controllers
             }
         }
 
-        #endregion " PRIVATE METHODS "
+        #endregion " PROTECTED METHODS "
     }
 }

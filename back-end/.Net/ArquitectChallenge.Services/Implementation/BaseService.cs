@@ -30,7 +30,7 @@ namespace ArquitectChallenge.Services.Implementation
 
         public T Save<T>(T model)
         {
-            return _eventRepository.Save<T>(model);
+            return _eventRepository.Save(model);
         }
     }
 }

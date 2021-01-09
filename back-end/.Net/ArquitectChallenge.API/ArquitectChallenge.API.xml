@@ -4,6 +4,18 @@
         <name>ArquitectChallenge.API</name>
     </assembly>
     <members>
+        <member name="T:ArquitectChallenge.API.Controllers.ApiController`1">
+            <summary>
+            Generic API controller.
+            </summary>
+            <typeparam name="T">Type of the model.</typeparam>
+        </member>
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.#ctor(ArquitectChallenge.Interfaces.Services.IBaseService)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="service">Service instance.</param>
+        </member>
         <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Delete(System.Int32)">
             <summary>
             Delete the item from database.
@@ -43,7 +55,7 @@
             <response code="408">Timeout by gettint the items.</response>
             <response code="500">Internal error by inserting the item.</response>
         </member>
-        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Put(System.Guid,`0)">
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Put(System.Int32,`0)">
             <summary>
             Update a specific item.
             </summary>
@@ -53,6 +65,31 @@
             <response code="200">Success by getting the items.</response>
             <response code="408">Timeout by gettint the items.</response>
             <response code="500">Internal error by getting the items.</response>
+        </member>
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Save(`0)">
+            <summary>
+            Save the item into database.
+            </summary>
+            <param name="model">Model to be saved.</param>
+            <returns>Result of saving the model.</returns>
+        </member>
+        <member name="T:ArquitectChallenge.API.Controllers.EventController">
+            <summary>
+            API of events.
+            </summary>
+        </member>
+        <member name="M:ArquitectChallenge.API.Controllers.EventController.#ctor(ArquitectChallenge.Interfaces.Services.Events.IEventService)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="service">Service instance.</param>
+        </member>
+        <member name="M:ArquitectChallenge.API.Controllers.EventController.Save(ArquitectChallenge.Domain.Events.EventData)">
+            <summary>
+            Saving the event.
+            </summary>
+            <param name="model">Event data.</param>
+            <returns>Result of saving the event.</returns>
         </member>
     </members>
 </doc>
