@@ -1,19 +1,20 @@
 ﻿using ArquitectChallenge.Domain;
-using ArquitectChallenge.Interfaces.Repositories;
+using ArquitectChallenge.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Net;
 
-namespace ArquitectChallenge.WebAPI.Controllers
+namespace ArquitectChallenge.API.Controllers
 {
+    [ApiController]
     public abstract class ApiController<T> : Controller where T : BaseObject
     {
-        private readonly IBaseRepository _mapping;
+        private readonly IBaseService _service;
 
-        public ApiController(IBaseRepository mapping)
+        public ApiController(IBaseService service)
         {
-            _mapping = mapping;
+            _service = service;
         }
 
         #region " APIS "
@@ -30,11 +31,11 @@ namespace ArquitectChallenge.WebAPI.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public virtual ActionResult Delete(Guid id)
+        public virtual ActionResult Delete(int id)
         {
             try
             {
-                _mapping.DeleteById(id.ToString());
+                _service.DeleteById<T>(id);
                 return Ok();
             }
             catch (TimeoutException)
@@ -62,7 +63,7 @@ namespace ArquitectChallenge.WebAPI.Controllers
         {
             try
             {
-                var result = _mapping.GetList<T>();
+                var result = _service.GetList<T>();
                 return Ok(result);
             }
             catch (TimeoutException)
@@ -88,11 +89,11 @@ namespace ArquitectChallenge.WebAPI.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public virtual ActionResult<T> Get(Guid id)
+        public virtual ActionResult<T> Get(int id)
         {
             try
             {
-                var result = _mapping.GetById<T>(id.ToString());
+                var result = _service.GetById<T>(id);
                 if (result == null)
                 {
                     return NotFound(new { message = "The item was not found." });
@@ -118,7 +119,7 @@ namespace ArquitectChallenge.WebAPI.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public virtual ActionResult Insert([FromBody] T model)
+        public virtual ActionResult Post([FromBody] T model)
         {
             return Save(model);
         }
@@ -136,7 +137,7 @@ namespace ArquitectChallenge.WebAPI.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public virtual ActionResult Update(Guid id, [FromBody] T model)
+        public virtual ActionResult Put(Guid id, [FromBody] T model)
         {
             return Save(model);
         }
@@ -149,7 +150,7 @@ namespace ArquitectChallenge.WebAPI.Controllers
         {
             try
             {
-                var result = _mapping.Save(model);
+                var result = _service.Save(model);
                 return Ok(model);
             }
             catch (TimeoutException)

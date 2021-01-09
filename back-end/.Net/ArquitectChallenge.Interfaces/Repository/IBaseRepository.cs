@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace ArquitectChallenge.Interfaces.Repositories
+namespace ArquitectChallenge.Interfaces.Repository
 {
     public interface IBaseRepository
     {
-        void DeleteById(string id);
+        void DeleteById<T>(int id);
 
-        T GetById<T>(string id);
+        T GetById<T>(int id);
 
         IList<T> GetList<T>();
 

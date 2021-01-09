@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ArquitectChallenge.WebAPI": {
+    "ArquitectChallenge.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "",

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ArquitectChallenge.API</name>
+    </assembly>
+    <members>
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Delete(System.Int32)">
+            <summary>
+            Delete the item from database.
+            </summary>
+            <param name="id">Identifier of the item.</param>
+            <returns>Result of the deletion.</returns>
+            <response code="200">Success by getting the products.</response>
+            <response code="408">Timeout by gettint the items.</response>
+            <response code="500">Internal error by getting the product.</response>
+        </member>
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Get">
+            <summary>
+            Get the list of all items.
+            </summary>
+            <returns>The list of the item.</returns>
+            <response code="200">Success by getting the items.</response>
+            <response code="408">Timeout by gettint the items.</response>
+            <response code="500">Internal error by getting the items.</response>
+        </member>
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Get(System.Int32)">
+            <summary>
+            Get an specific item.
+            </summary>
+            <param name="id">Identifier of the item.</param>
+            <returns>The item with the Identifier informed.</returns>
+            <response code="200">Success by getting the item.</response>
+            <response code="408">Timeout by gettint the items.</response>
+            <response code="500">Internal error by getting the item.</response>
+        </member>
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Post(`0)">
+            <summary>
+            Insert the item into database.
+            </summary>
+            <param name="model">Model to be saved.</param>
+            <returns>The item that was saved with its Id.</returns>
+            <response code="200">Success by inserting the item.</response>
+            <response code="408">Timeout by gettint the items.</response>
+            <response code="500">Internal error by inserting the item.</response>
+        </member>
+        <member name="M:ArquitectChallenge.API.Controllers.ApiController`1.Put(System.Guid,`0)">
+            <summary>
+            Update a specific item.
+            </summary>
+            <param name="id">Identifier of the item.</param>
+            <param name="model">Model to be saved.</param>
+            <returns>The item that was saved.</returns>
+            <response code="200">Success by getting the items.</response>
+            <response code="408">Timeout by gettint the items.</response>
+            <response code="500">Internal error by getting the items.</response>
+        </member>
+    </members>
+</doc>
