@@ -21,20 +21,23 @@ namespace ArquitectChallenge.Services.Repository.Events
                                     Tag = x.Key,
                                     Quantity = x.Count()
                                 }).ToList();
+            if (groupped.Count > 0)
+            {
+                groupped.AddRange(groupped.Where(x => !string.IsNullOrWhiteSpace(x.FirstTag()))
+                            .GroupBy(x => x.FirstTag()).Select(x => new GroupEventData
+                            {
+                                Tag = x.Key,
+                                Quantity = x.Sum(x => x.Quantity)
+                            }).ToList());
 
-            groupped.AddRange(groupped.Where(x => !string.IsNullOrWhiteSpace(x.FirstTag()))
-                        .GroupBy(x => x.FirstTag()).Select(x => new GroupEventData
-                        {
-                            Tag = x.Key,
-                            Quantity = x.Sum(x => x.Quantity)
-                        }).ToList());
+                groupped.AddRange(groupped.Where(x => !string.IsNullOrWhiteSpace(x.SecondTag()))
+                            .GroupBy(x => x.SecondTag()).Select(x => new GroupEventData
+                            {
+                                Tag = x.Key,
+                                Quantity = x.Sum(x => x.Quantity)
+                            }).ToList());
 
-            groupped.AddRange(groupped.Where(x => !string.IsNullOrWhiteSpace(x.SecondTag()))
-                        .GroupBy(x => x.SecondTag()).Select(x => new GroupEventData
-                        {
-                            Tag = x.Key,
-                            Quantity = x.Sum(x => x.Quantity)
-                        }).ToList());
+            }
 
             return groupped.OrderBy(x => x.Tag).ToList();
         }
