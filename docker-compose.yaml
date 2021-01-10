@@ -1,6 +1,27 @@
 version: '3.5'
 
 services:
+  db:
+     image: mysql:8.0.0
+     environment:
+       MYSQL_RANDOM_ROOT_PASSWORD: 1
+       MYSQL_DATABASE: arquitectchallenge
+       MYSQL_USER: dbuser
+       MYSQL_PASSWORD: dbuserpassword
+     volumes:
+       - dbdata:/var/lib/mysql
+       - ./_MySQL_Init_Script:/docker-entrypoint-initdb.d
+     restart: always
+
+  main-api:
+    depends_on:
+      - db
+    build:        
+      context: ./back-end/.Net/
+      dockerfile: ./ArquitectChallenge.API/Dockerfile
+    restart: always
+    ports:
+      - "5501"
 
   #Proxies requests to internal services
   reverse-proxy:
@@ -13,12 +34,7 @@ services:
       - ./reverse_proxy/proxy.conf:/etc/nginx/proxy.conf:ro
     ports:
       - 80:80
-    restart: on-failure
+    restart: always
 
-  main-api:
-    build:        
-      context: ./back-end/.Net/
-      dockerfile: ./ArquitectChallenge.API/Dockerfile
-    restart: on-failure
-    ports:
-      - "5501"
+volumes:
+    dbdata:
