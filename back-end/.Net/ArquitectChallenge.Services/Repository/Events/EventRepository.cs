@@ -14,7 +14,8 @@ namespace ArquitectChallenge.Services.Repository.Events
 
         public IList<GroupEventData> GetAllGroupedByTag()
         {
-            var groupped = _dataContext.Events.Where(x => !string.IsNullOrWhiteSpace(x.Tag))
+            var groupped = _dataContext.Events.AsNoTracking()
+                                .Where(x => !string.IsNullOrWhiteSpace(x.Tag))
                                 .GroupBy(x => x.Tag)
                                 .Select(x => new GroupEventData
                                 {
@@ -36,10 +37,16 @@ namespace ArquitectChallenge.Services.Repository.Events
                                 Tag = x.Key,
                                 Quantity = x.Sum(x => x.Quantity)
                             }).ToList());
-
             }
 
             return groupped.OrderBy(x => x.Tag).ToList();
+        }
+
+        public IList<EventData> GetNumericEvents()
+        {
+            return _dataContext.Events
+                        .Where(x => x.IsNumeric)
+                        .ToList();
         }
 
         public override T GetById<T>(int id)
@@ -57,6 +64,7 @@ namespace ArquitectChallenge.Services.Repository.Events
             currentItem.Tag = updatedItem.Tag;
             currentItem.TimeStamp = updatedItem.TimeStamp;
             currentItem.Valor = updatedItem.Valor;
+            currentItem.FillStatus();
         }
     }
 }

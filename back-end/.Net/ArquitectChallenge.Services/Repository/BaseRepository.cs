@@ -34,12 +34,12 @@ namespace ArquitectChallenge.Services.Repository
         {
             var modelConverted = model as TDto;
 
-            if (modelConverted.Id > 0)
+            if (modelConverted != null 
+                    && modelConverted.Id > 0)
             {
                 var item = GetById<T>(modelConverted.Id) as TDto;
                 if (item != null)
                 {
-                    item.Status = modelConverted.Status;
                     UpdateItem(item, modelConverted);
                 }
                 else

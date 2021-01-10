@@ -92,12 +92,21 @@
         </member>
         <member name="M:ArquitectChallenge.API.Controllers.EventController.GetAllGroupedByTag">
             <summary>
-            Get the list of events grouped by tag.
+            Get the number of events grouped by tag.
             </summary>
-            <returns>The list of events grouped by tag.</returns>
-            <response code="200">Success by getting the items.</response>
-            <response code="408">Timeout by getting the items.</response>
-            <response code="500">Internal error by getting the items.</response>
+            <returns>The number of events grouped by tag.</returns>
+            <response code="200">Success by getting the groups.</response>
+            <response code="408">Timeout by getting the groups.</response>
+            <response code="500">Internal error by getting the groups.</response>
+        </member>
+        <member name="M:ArquitectChallenge.API.Controllers.EventController.GetNumericEvents">
+            <summary>
+            Get the numeric events.
+            </summary>
+            <returns>The list of numeric events.</returns>
+            <response code="200">Success by getting the events.</response>
+            <response code="408">Timeout by getting the events.</response>
+            <response code="500">Internal error by getting the events.</response>
         </member>
         <member name="M:ArquitectChallenge.API.Controllers.EventController.Save(ArquitectChallenge.Domain.Events.EventData)">
             <summary>

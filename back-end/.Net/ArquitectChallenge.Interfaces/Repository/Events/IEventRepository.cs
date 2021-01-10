@@ -5,6 +5,8 @@ namespace ArquitectChallenge.Interfaces.Repository.Events
 {
     public interface IEventRepository : IBaseRepository
     {
+        IList<EventData> GetNumericEvents();
+
         IList<GroupEventData> GetAllGroupedByTag();
     }
 }

@@ -21,12 +21,12 @@ namespace ArquitectChallenge.API.Controllers
         }
 
         /// <summary>
-        /// Get the list of events grouped by tag.
+        /// Get the number of events grouped by tag.
         /// </summary>
-        /// <returns>The list of events grouped by tag.</returns>
-        /// <response code="200">Success by getting the items.</response>
-        /// <response code="408">Timeout by getting the items.</response>
-        /// <response code="500">Internal error by getting the items.</response>
+        /// <returns>The number of events grouped by tag.</returns>
+        /// <response code="200">Success by getting the groups.</response>
+        /// <response code="408">Timeout by getting the groups.</response>
+        /// <response code="500">Internal error by getting the groups.</response>
         [HttpGet]
         [Route("GetAllGroupedByTag")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -37,6 +37,35 @@ namespace ArquitectChallenge.API.Controllers
             try
             {
                 var result = _service.GetAllGroupedByTag();
+                return Ok(result);
+            }
+            catch (TimeoutException)
+            {
+                return StatusCode((int)HttpStatusCode.RequestTimeout);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        /// <summary>
+        /// Get the numeric events.
+        /// </summary>
+        /// <returns>The list of numeric events.</returns>
+        /// <response code="200">Success by getting the events.</response>
+        /// <response code="408">Timeout by getting the events.</response>
+        /// <response code="500">Internal error by getting the events.</response>
+        [HttpGet]
+        [Route("GetNumericEvents")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public ActionResult GetNumericEvents()
+        {
+            try
+            {
+                var result = _service.GetNumericEvents();
                 return Ok(result);
             }
             catch (TimeoutException)

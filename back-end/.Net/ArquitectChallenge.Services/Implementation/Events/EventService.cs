@@ -15,5 +15,10 @@ namespace ArquitectChallenge.Services.Implementation.Events
         {
             return _repository.GetAllGroupedByTag();
         }
+
+        public IList<EventData> GetNumericEvents()
+        {
+            return _repository.GetNumericEvents();
+        }
     }
 }
