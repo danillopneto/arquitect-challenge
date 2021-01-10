@@ -6,7 +6,9 @@ networks:
 
 services:
   main-api:
-    build: ./back-end/.Net/
+    build:        
+      context: ./back-end/.Net/
+      dockerfile: ./ArquitectChallenge.API/Dockerfile
     restart: always
     ports:
       - "7000:80"
