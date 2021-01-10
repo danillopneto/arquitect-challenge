@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1-stretch AS build
 WORKDIR /src
 COPY ["ArquitectChallenge.API/ArquitectChallenge.API.csproj", "ArquitectChallenge.API/"]
+COPY ["ArquitectChallenge.API/ArquitectChallenge.API.xml", "ArquitectChallenge.API/"]
 COPY ["ArquitectChallenge.Domain/ArquitectChallenge.Domain.csproj", "ArquitectChallenge.Domain/"]
 COPY ["ArquitectChallenge.Configuration/ArquitectChallenge.Configuration.csproj", "ArquitectChallenge.Configuration/"]
 COPY ["ArquitectChallenge.Interfaces/ArquitectChallenge.Interfaces.csproj", "ArquitectChallenge.Interfaces/"]

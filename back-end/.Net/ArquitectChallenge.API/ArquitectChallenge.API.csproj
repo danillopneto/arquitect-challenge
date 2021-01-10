@@ -10,6 +10,10 @@
     <DocumentationFile>D:\Documents\GitHub\architect-challenge\back-end\.Net\ArquitectChallenge.API\ArquitectChallenge.API.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\Documents\GitHub\architect-challenge\back-end\.Net\ArquitectChallenge.API\ArquitectChallenge.API.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
