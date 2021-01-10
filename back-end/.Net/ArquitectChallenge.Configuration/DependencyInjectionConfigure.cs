@@ -10,16 +10,16 @@ namespace ArquitectChallenge.Configuration
 {
     public static class DependencyInjectionConfigure
     {
-        public static void ConfigureDependencies(IServiceCollection services)
+        public static void ConfigureDependencies(IServiceCollection services, string connectionString)
         {
-            services.ConfigureDatabase();
+            services.ConfigureDatabase(connectionString);
             services.ConfigureRepositoryDependencies();
             services.ConfigureServiceDependencies();
         }
 
-        private static void ConfigureDatabase(this IServiceCollection services)
+        private static void ConfigureDatabase(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
+            services.AddDbContext<DataContext>(opt => opt.UseMySql(connectionString));
         }
 
         private static void ConfigureRepositoryDependencies(this IServiceCollection services)

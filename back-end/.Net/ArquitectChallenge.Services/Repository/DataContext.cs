@@ -8,6 +8,7 @@ namespace ArquitectChallenge.Services.Repository
         public DataContext(DbContextOptions<DataContext> options)
                 : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<EventData> Events { get; set; }

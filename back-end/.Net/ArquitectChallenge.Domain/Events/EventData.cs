@@ -1,21 +1,26 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
 
 namespace ArquitectChallenge.Domain.Events
 {
+    [Table("EventData")]
     public class EventData : BaseObject
     {
         private string _valor;
 
+        [Column("IsNumeric")]
         public bool IsNumeric { get; private set; }
 
+        [Column("Tag")]
         public string Tag { get; set; }
 
         [Range(1, double.MaxValue)]
         [Required]
+        [Column("TimeStamp")]
         public double TimeStamp { get; set; }
 
+        [Column("Valor")]
         public string Valor
         {
             get
