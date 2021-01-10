@@ -1,11 +1,13 @@
 
 back-end/.Net/.vs
+back-end/.Net/ArquitectChallenge.API/bin
+back-end/.Net/ArquitectChallenge.API/obj
+back-end/.Net/ArquitectChallenge.API/ArquitectChallenge.API.csproj.user
+back-end/.Net/ArquitectChallenge.Configuration/bin
+back-end/.Net/ArquitectChallenge.Configuration/obj
 back-end/.Net/ArquitectChallenge.Domain/bin
 back-end/.Net/ArquitectChallenge.Domain/obj
 back-end/.Net/ArquitectChallenge.Interfaces/bin
 back-end/.Net/ArquitectChallenge.Interfaces/obj
 back-end/.Net/ArquitectChallenge.Services/bin
 back-end/.Net/ArquitectChallenge.Services/obj
-back-end/.Net/ArquitectChallenge.API/bin
-back-end/.Net/ArquitectChallenge.API/obj
-back-end/.Net/ArquitectChallenge.API/ArquitectChallenge.API.csproj.user

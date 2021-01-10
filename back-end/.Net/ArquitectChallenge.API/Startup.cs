@@ -1,11 +1,6 @@
-using ArquitectChallenge.Interfaces.Repository.Events;
-using ArquitectChallenge.Interfaces.Services.Events;
-using ArquitectChallenge.Services.Implementation.Events;
-using ArquitectChallenge.Services.Repository;
-using ArquitectChallenge.Services.Repository.Events;
+using ArquitectChallenge.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,9 +23,7 @@ namespace ArquitectChallenge.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
-            services.AddScoped<IEventRepository, EventRepository>();
-            services.AddScoped<IEventService, EventService>();
+            DependencyInjectionConfigure.ConfigureDependencies(services);
 
             services.AddControllers();
 
