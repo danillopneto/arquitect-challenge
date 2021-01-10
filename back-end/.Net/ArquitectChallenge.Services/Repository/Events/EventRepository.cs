@@ -29,14 +29,14 @@ namespace ArquitectChallenge.Services.Repository.Events
                             .GroupBy(x => x.FirstTag()).Select(x => new GroupEventData
                             {
                                 Tag = x.Key,
-                                Count = x.Sum(x => x.Count)
+                                Count = x.Sum(c => c.Count)
                             }).ToList());
 
                 groupped.AddRange(groupped.Where(x => !string.IsNullOrWhiteSpace(x.SecondTag()))
                             .GroupBy(x => x.SecondTag()).Select(x => new GroupEventData
                             {
                                 Tag = x.Key,
-                                Count = x.Sum(x => x.Count)
+                                Count = x.Sum(c => c.Count)
                             }).ToList());
             }
 

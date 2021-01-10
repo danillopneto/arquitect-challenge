@@ -13,8 +13,8 @@ namespace ArquitectChallenge.API.Controllers
     /// <typeparam name="TDto">Type of the model.</typeparam>
     /// <typeparam name="TService">Type of the service.</typeparam>
     [ApiController]
-    public abstract class ApiController<TDto, TService> : Controller 
-        where TDto : BaseObject 
+    public abstract class ApiController<TDto, TService> : ControllerBase
+        where TDto : BaseObject
         where TService : IBaseService
     {
         /// <summary>
