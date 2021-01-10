@@ -1,4 +1,5 @@
 ﻿using ArquitectChallenge.Domain.Events;
+using ArquitectChallenge.Domain.Utilities;
 using ArquitectChallenge.Interfaces.Repository.Events;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace ArquitectChallenge.Services.Repository.Events
                                 .Select(x => new GroupEventData
                                 {
                                     Tag = x.Key,
-                                    Quantity = x.Count()
+                                    Count = x.Count()
                                 }).ToList();
             if (groupped.Count > 0)
             {
@@ -28,25 +29,18 @@ namespace ArquitectChallenge.Services.Repository.Events
                             .GroupBy(x => x.FirstTag()).Select(x => new GroupEventData
                             {
                                 Tag = x.Key,
-                                Quantity = x.Sum(x => x.Quantity)
+                                Count = x.Sum(x => x.Count)
                             }).ToList());
 
                 groupped.AddRange(groupped.Where(x => !string.IsNullOrWhiteSpace(x.SecondTag()))
                             .GroupBy(x => x.SecondTag()).Select(x => new GroupEventData
                             {
                                 Tag = x.Key,
-                                Quantity = x.Sum(x => x.Quantity)
+                                Count = x.Sum(x => x.Count)
                             }).ToList());
             }
 
             return groupped.OrderBy(x => x.Tag).ToList();
-        }
-
-        public IList<EventData> GetNumericEvents()
-        {
-            return _dataContext.Events
-                        .Where(x => x.IsNumeric)
-                        .ToList();
         }
 
         public override T GetById<T>(int id)
@@ -54,9 +48,30 @@ namespace ArquitectChallenge.Services.Repository.Events
             return ConvertTo<T>(_dataContext.Events.Where(x => x.Id == id).FirstOrDefault());
         }
 
+        public IList<EventByDate> GetEventsGroupedByHour()
+        {
+            var events = _dataContext.Events
+                            .GroupBy(x => x.TimeStamp.UnixTimeStampToDateTime())
+                            .Select(x => new EventByDate
+                            {
+                                Count = x.Count(),
+                                Date = x.Key
+                            })
+                            .ToList();
+
+            return events;
+        }
+
         public override IList<T> GetList<T>()
         {
             return _dataContext.Events.AsNoTracking().ToList().Select(x => ConvertTo<T>(x)).ToList();
+        }
+
+        public IList<EventData> GetNumericEvents()
+        {
+            return _dataContext.Events
+                        .Where(x => x.IsNumeric)
+                        .ToList();
         }
 
         protected override void UpdateItem(EventData currentItem, EventData updatedItem)

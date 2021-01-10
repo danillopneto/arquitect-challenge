@@ -2,7 +2,7 @@
 {
     public class GroupEventData
     {
-        public int Quantity { get; set; }
+        public int Count { get; set; }
 
         public string Tag { get; set; }
 

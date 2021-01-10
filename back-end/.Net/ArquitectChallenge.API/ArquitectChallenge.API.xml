@@ -99,6 +99,15 @@
             <response code="408">Timeout by getting the groups.</response>
             <response code="500">Internal error by getting the groups.</response>
         </member>
+        <member name="M:ArquitectChallenge.API.Controllers.EventController.GetEventsGroupedByHour">
+            <summary>
+            Get events groupped by date and hour.
+            </summary>
+            <returns>The list of events groupped by date and hour.</returns>
+            <response code="200">Success by getting the events.</response>
+            <response code="408">Timeout by getting the events.</response>
+            <response code="500">Internal error by getting the events.</response>
+        </member>
         <member name="M:ArquitectChallenge.API.Controllers.EventController.GetNumericEvents">
             <summary>
             Get the numeric events.

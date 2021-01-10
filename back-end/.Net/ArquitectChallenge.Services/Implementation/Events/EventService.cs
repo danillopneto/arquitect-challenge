@@ -16,6 +16,11 @@ namespace ArquitectChallenge.Services.Implementation.Events
             return _repository.GetAllGroupedByTag();
         }
 
+        public IList<EventByDate> GetEventsGroupedByHour()
+        {
+            return _repository.GetEventsGroupedByHour();
+        }
+
         public IList<EventData> GetNumericEvents()
         {
             return _repository.GetNumericEvents();

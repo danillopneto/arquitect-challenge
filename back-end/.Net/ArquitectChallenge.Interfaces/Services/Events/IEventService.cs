@@ -6,7 +6,9 @@ namespace ArquitectChallenge.Interfaces.Services.Events
     public interface IEventService : IBaseService
     {
         public IList<GroupEventData> GetAllGroupedByTag();
-        
+
+        IList<EventByDate> GetEventsGroupedByHour();
+
         public IList<EventData> GetNumericEvents();
     }
 }
