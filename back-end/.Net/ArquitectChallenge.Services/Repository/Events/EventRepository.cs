@@ -79,7 +79,6 @@ namespace ArquitectChallenge.Services.Repository.Events
             currentItem.Tag = updatedItem.Tag;
             currentItem.TimeStamp = updatedItem.TimeStamp;
             currentItem.Valor = updatedItem.Valor;
-            currentItem.FillStatus();
         }
     }
 }

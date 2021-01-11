@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ArquitectChallenge.Domain.Utilities;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.RegularExpressions;
 
 namespace ArquitectChallenge.Domain.Events
 {
@@ -30,15 +30,23 @@ namespace ArquitectChallenge.Domain.Events
             set
             {
                 _valor = value;
-                IsNumeric = Regex.IsMatch(_valor, "^[0-9]+$");
+                FillIsNumeric();
+                FillStatus();
             }
+        }
+
+        #region " DOMAIN RULES "
+
+        private void FillIsNumeric()
+        {
+            IsNumeric = UtilExtensions.IsNumeric(_valor);
         }
 
         /// <summary>
         /// Fill status as the following:
         /// "Cada evento poderá ter o estado processado ou erro, caso o campo valor chegue vazio, o status do evento será erro caso contrário processado."
         /// </summary>
-        public void FillStatus()
+        private void FillStatus()
         {
             if (string.IsNullOrWhiteSpace(Valor))
             {
@@ -49,5 +57,7 @@ namespace ArquitectChallenge.Domain.Events
                 Status = EnumStatus.Done;
             }
         }
+
+        #endregion " DOMAIN RULES "
     }
 }

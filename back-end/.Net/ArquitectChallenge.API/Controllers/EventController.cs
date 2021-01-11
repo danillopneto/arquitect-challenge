@@ -114,7 +114,6 @@ namespace ArquitectChallenge.API.Controllers
         /// <returns>Result of saving the event.</returns>
         protected override ActionResult Save(EventData model)
         {
-            model.FillStatus();
             return base.Save(model);
         }
     }
