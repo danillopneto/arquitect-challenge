@@ -35,12 +35,15 @@ namespace ArquitectChallenge.API
             app.UseHttpsRedirection();
             app.UseMvc();
 
-            app.UseSwagger();
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "api/swagger/{documentName}/swagger.json";
+            });
 
             app.UseSwaggerUI(c =>
             {
-                c.RoutePrefix = string.Empty;
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                c.RoutePrefix = "api/swagger";
+                c.SwaggerEndpoint("/api/swagger/v1/swagger.json", "v1");
             });
         }
 
