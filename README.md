@@ -62,7 +62,7 @@ Descrição:
         * brasil.sul - 1500
         * brasil.sul.sensor01 - 1250
         * brasil.sul.sensor02 - 250
-> A lista com o agrupamento por região/sensão é disponibilizada pela API: `http://[servidor]/api/v1/Event/GetAllGroupedByTag`
+> A lista com o agrupamento por região/sensor é disponibilizada pela API: `http://[servidor]/api/v1/Event/GetAllGroupedByTag`
 
 ## Avaliação
 
@@ -75,13 +75,11 @@ Em caso de dúvida, entre em contato com o responsável pelo seu processo seleti
 ## Solução
 
 * Foi criada uma aplicação com as seguintes tecnologias:
-    * Back-end em .NET Core 2.1 *(seguindo a restrição definida no trecho referente ao ambiente)*
+    - [x] Back-end em .NET Core 2.1 *(seguindo a restrição definida no trecho referente ao ambiente)*
         * WebAPI no padrão REST com documentação feita via Swagger.
-        * EntityFramework como ORM e banco de dados MySql.
-    - [x] Feito
-    * Front-end em Angular 11
-    - [ ] A desenvolver
-
+        * EntityFramework como ORM e banco de dados MySql.    
+    - [ ] Front-end em Angular 11
+    
 ## Como utilizar
 > **Requisito:** É necessário ter o docker instalado em seu sistema operacional (Linux, Windows ou Mac)
 
@@ -91,9 +89,6 @@ Rode o comando (apontando a pasta local do arquivo):
 
 ### Disponibilizar front-end e back-end
 Rode o comando (apontando a pasta local do arquivo):  
-- ` docker-compose -f docker-compose.yml up --build --scale main-api=4` 
-
-#### É possível renomear um dos arquivos para 'docker-compose.yml' e rodar o comando mais simplificado:  
 - ` docker-compose up --build --scale main-api=4` 
 
 #### Para parar a execução no console (executando no modo 'detached'):  
