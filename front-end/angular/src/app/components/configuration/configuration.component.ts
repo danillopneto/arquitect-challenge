@@ -37,6 +37,12 @@ export class ConfigurationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  turnOnOff(configuration: Configuration){
+    if (!configuration.enabled) {
+      configuration.sensors = null;
+    }
+  }
+
   onFormSubmit() {    
   }
 }
