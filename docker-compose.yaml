@@ -23,18 +23,25 @@ services:
     ports:
       - "5501"
 
+  client:
+    build:
+        context: ./front-end/angular
+        dockerfile: Dockerfile
+    ports: 
+      - "5000"
+
   #Proxies requests to internal services
-  reverse-proxy:
+  nginx:
     image: nginx:alpine
-    container_name: reverse_proxy
+    container_name: nginx
     depends_on:
+      - client
       - main-api
     volumes:
-      - ./reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
-      - ./reverse_proxy/proxy.conf:/etc/nginx/proxy.conf:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/proxy.conf:/etc/nginx/proxy.conf:ro
     ports:
       - 8080:80
     restart: always
-
 volumes:
     dbdata:
