@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Configuration } from './configuration.model';
+import { ConfigurationService } from './configuration.service';
 
 @Component({
   selector: 'app-configuration',
@@ -31,7 +32,7 @@ export class ConfigurationComponent implements OnInit {
     sensors: null
   };
 
-  constructor() {    
+  constructor(private configurationService: ConfigurationService) {    
   }
 
   ngOnInit(): void {
@@ -44,5 +45,10 @@ export class ConfigurationComponent implements OnInit {
   }
 
   onFormSubmit() {    
+    this.configurationService.startApplication(
+                                               this.north, 
+                                               this.northeast, 
+                                               this.south, 
+                                               this.southeast);
   }
 }
