@@ -1,0 +1,56 @@
+<form class="configuration-form" (ngSubmit)="onFormSubmit()">
+    <mat-card class="sensor-card">
+        <mat-card-content>
+            <div class="north-sensor">
+                <mat-slide-toggle [(ngModel)]="north.enabled" name="enabled" color="primary">
+                    {{ north.description }}
+                </mat-slide-toggle>
+                <mat-form-field>
+                    <input matInput [attr.disabled]="north.enabled ? null : ''" placeholder="Quantidade de sensores"
+                        [(ngModel)]="north.sensors" name="sensors" [value]="north.enabled ? north.sensors : ''">
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="sensor-card">
+        <mat-card-content>
+            <div class="northeast-sensor">
+                <mat-slide-toggle [(ngModel)]="northeast.enabled" name="enabled" color="primary">
+                    {{ northeast.description }}
+                </mat-slide-toggle>
+                <mat-form-field>
+                    <input matInput [attr.disabled]="northeast.enabled ? null : ''" placeholder="Quantidade de sensores"
+                        [(ngModel)]="northeast.sensors" name="sensors" [value]="northeast.enabled ? northeast.sensors : ''">
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="sensor-card">
+        <mat-card-content>
+            <div class="south-sensor">
+                <mat-slide-toggle [(ngModel)]="south.enabled" name="enabled" color="primary">
+                    {{ south.description }}
+                </mat-slide-toggle>
+                <mat-form-field>
+                    <input matInput [attr.disabled]="south.enabled ? null : ''" placeholder="Quantidade de sensores"
+                        [(ngModel)]="south.sensors" name="sensors" [value]="south.enabled ? south.sensors : ''">
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="sensor-card">
+        <mat-card-content>
+            <div class="southeast-sensor">
+                <mat-slide-toggle [(ngModel)]="southeast.enabled" name="enabled" color="primary">
+                    {{ southeast.description }}
+                </mat-slide-toggle>
+                <mat-form-field>
+                    <input matInput [attr.disabled]="southeast.enabled ? null : ''" placeholder="Quantidade de sensores"
+                        [(ngModel)]="southeast.sensors" name="sensors" [value]="southeast.enabled ? southeast.sensors : ''">
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <br>
+    <button mat-raised-button type="submit" color="primary">Iniciar aplicação</button>
+</form>

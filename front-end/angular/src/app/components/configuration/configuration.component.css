@@ -1,0 +1,14 @@
+.configuration-form mat-slide-toggle {
+    margin: 8px 0;
+    display: block;
+}
+
+.configuration-form button {
+    margin-top: 20px;
+}
+
+.configuration-form .sensor-card {
+    width: auto;
+    display: inline-block;
+    margin-right: 10px;
+}
