@@ -51,7 +51,7 @@ namespace ArquitectChallenge.Services.Repository.Events
         public IList<EventByDate> GetEventsGroupedByHour()
         {
             var events = _dataContext.Events
-                            .GroupBy(x => x.TimeStamp.UnixTimeStampToDateTime())
+                            .GroupBy(x => x.Timestamp.UnixTimeStampToDateTime())
                             .Select(x => new EventByDate
                             {
                                 Count = x.Count(),
@@ -64,7 +64,11 @@ namespace ArquitectChallenge.Services.Repository.Events
 
         public override IList<T> GetList<T>()
         {
-            return _dataContext.Events.AsNoTracking().ToList().Select(x => ConvertTo<T>(x)).ToList();
+            return _dataContext.Events.AsNoTracking().ToList()
+                            .OrderBy(x => x.Tag)
+                            .ThenByDescending(x => x.Timestamp)
+                            .Select(ConvertTo<T>)                            
+                            .ToList();
         }
 
         public IList<EventData> GetNumericEvents()
@@ -77,7 +81,7 @@ namespace ArquitectChallenge.Services.Repository.Events
         protected override void UpdateItem(EventData currentItem, EventData updatedItem)
         {
             currentItem.Tag = updatedItem.Tag;
-            currentItem.TimeStamp = updatedItem.TimeStamp;
+            currentItem.Timestamp = updatedItem.Timestamp;
             currentItem.Valor = updatedItem.Valor;
         }
     }

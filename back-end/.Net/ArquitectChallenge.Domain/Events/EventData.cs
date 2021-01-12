@@ -17,8 +17,8 @@ namespace ArquitectChallenge.Domain.Events
 
         [Range(1, double.MaxValue)]
         [Required]
-        [Column("TimeStamp")]
-        public double TimeStamp { get; set; }
+        [Column("Timestamp")]
+        public double Timestamp { get; set; }
 
         [Column("Valor")]
         public string Valor
