@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.red{
+	color: red;
+}
+
+.v-middle {
+    vertical-align: middle;
+}
+
+.msg-success {
+	background-color: #28a745;
+	color: #fff;
+}
+
+.msg-error {
+	background-color: #e35e6b;
+	color: #fff;
+}
+
+.msg-success .mat-simple-snackbar span.mat-button-wrapper,
+.msg-error .mat-simple-snackbar span.mat-button-wrapper {
+    color: white;
+}
+
+.jumping {
+	transform: translate(0%, 0%);
+	animation: pop 1.3s infinite;
+}
+
+@keyframes pop {
+	0% {
+		transform: translate(0%, 0%) scale(1.25, 0.75);
+	}
+	50% {
+		transform: translate(0%, -50%) scale(1, 1);
+	}
+	55% {
+		transform: translate(0%, -50%) rotate(15deg);
+	}
+	60% {
+		transform: translate(0%, -50%) rotate(-15deg);
+	}
+	65% {
+		transform: translate(0%, -50%) rotate(15deg);
+	}
+	70% {
+		transform: translate(0%, -50%) rotate(-15deg);
+	}
+	100% {
+		transform: translate(0%, 0%) scale(1.25, 0.75);
+	}
+}

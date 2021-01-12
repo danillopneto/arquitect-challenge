@@ -11,3 +11,51 @@ back-end/.Net/ArquitectChallenge.Interfaces/bin
 back-end/.Net/ArquitectChallenge.Interfaces/obj
 back-end/.Net/ArquitectChallenge.Services/bin
 back-end/.Net/ArquitectChallenge.Services/obj
+front-end/angular/package-lock.json
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+front-end/angular/dist
+front-end/angular/tmp
+front-end/angular/out-tsc
+
+#Only exists if Bazel was run
+front-end/angular/bazel-out
+
+# dependencies
+front-end/angular/node_modules
+
+# profiling files
+front-end/angular/chrome-profiler-events*.json
+front-end/angular/speed-measure-plugin*.json
+
+# IDEs and editors
+front-end/angular/.idea
+front-end/angular/.project
+front-end/angular/.classpath
+front-end/angular/.c9/
+front-end/angular/*.launch
+front-end/angular/.settings/
+front-end/angular/*.sublime-workspace
+
+# IDE - VSCode
+front-end/angular/.vscode/*
+front-end/angular/!.vscode/settings.json
+front-end/angular/!.vscode/tasks.json
+front-end/angular/!.vscode/launch.json
+front-end/angular/!.vscode/extensions.json
+front-end/angular/.history/*
+
+# misc
+front-end/angular/.sass-cache
+front-end/angular/connect.lock
+front-end/angular/coverage
+front-end/angular/libpeerconnection.log
+front-end/angularnpm-debug.log
+front-end/angularyarn-error.log
+front-end/angulartestem.log
+front-end/angular/typings
+
+# System Files
+front-end/angular.DS_Store
+front-end/angularThumbs.db

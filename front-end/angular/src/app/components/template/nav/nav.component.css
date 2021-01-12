@@ -1,0 +1,45 @@
+.header a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+}
+
+.header .logo {
+    max-height: 50px;
+    cursor: pointer;
+}
+
+.header .title-group {
+    padding-left: 25px;
+}
+
+.header .title-group i {
+    padding-right: 5px;
+}
+
+.sidenav {
+    background: #673ab7;
+    width: 220px;
+}
+
+.sidenav a {
+    color: #FFF
+}
+
+.sidenav i {
+    padding-right: 10px;
+}
+
+.content {
+    padding: 16px;
+    background-color: #FFF;
+}
+
+.sidenav-container {
+    flex: 1;
+}
+
+.is-mobile .sidenav-container {
+    flex: 1 auto;
+}
