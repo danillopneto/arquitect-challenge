@@ -17,7 +17,7 @@ export class EventsReadComponent implements AfterViewInit, OnInit {
   @ViewChild(MatTable) table!: MatTable<EventData>;
   dataSource!: EventsReadDataSource;
 
-  displayedColumns = ['tag', 'timestamp', 'valor'];
+  displayedColumns = ['tag', 'timestamp', 'valor', 'status'];
 
   constructor(private eventReadService: EventReadService){
   }

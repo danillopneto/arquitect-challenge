@@ -4,7 +4,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { EventReadService } from './events-read-service';
 
 /**
  * Data source for the EventsRead view. This class should
@@ -69,6 +68,7 @@ export class EventsReadDataSource extends DataSource<EventData> {
         case 'tag': return compare(a.tag, b.tag, isAsc);
         case 'timestamp': return compare(+a.timestamp, +b.timestamp, isAsc);
         case 'valor': return compare(+a.valor!, +b.valor!, isAsc);
+        case 'status': return compare(+a.status!, +b.status!, isAsc);
         default: return 0;
       }
     });
