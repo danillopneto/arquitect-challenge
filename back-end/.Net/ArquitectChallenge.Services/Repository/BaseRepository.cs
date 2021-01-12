@@ -57,15 +57,5 @@ namespace ArquitectChallenge.Services.Repository
         }
 
         protected abstract void UpdateItem(TDto currentItem, TDto updatedItem);
-
-        protected virtual T ConvertTo<T>(BaseObject model)
-        {
-            if (model == null)
-            {
-                return default;
-            }
-
-            return (T)Convert.ChangeType(model, typeof(T));
-        }
     }
 }

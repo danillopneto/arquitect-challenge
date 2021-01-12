@@ -1,6 +1,8 @@
 ﻿using ArquitectChallenge.Domain.Events;
+using ArquitectChallenge.Domain.Utilities;
 using ArquitectChallenge.Interfaces.Repository.Events;
 using ArquitectChallenge.Interfaces.Services.Events;
+using System;
 using System.Collections.Generic;
 
 namespace ArquitectChallenge.Services.Implementation.Events
@@ -24,6 +26,16 @@ namespace ArquitectChallenge.Services.Implementation.Events
         public IList<EventData> GetNumericEvents()
         {
             return _repository.GetNumericEvents();
+        }
+
+        public override T Save<T>(T model)
+        {
+            /* Preparing object to be saved. */
+            var modelPrepared = UtilExtensions.ConvertTo<EventData>(model);
+            modelPrepared.PrepareToSave();
+
+            /* Casting back to T before saving. */
+            return base.Save(modelPrepared.ConvertTo<T>());
         }
     }
 }

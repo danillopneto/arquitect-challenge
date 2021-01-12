@@ -1,5 +1,6 @@
 ﻿using ArquitectChallenge.Interfaces.Repository;
 using ArquitectChallenge.Interfaces.Services;
+using System;
 using System.Collections.Generic;
 
 namespace ArquitectChallenge.Services.Implementation
@@ -13,24 +14,34 @@ namespace ArquitectChallenge.Services.Implementation
             _repository = repository;
         }
 
-        public void DeleteById<T>(int id)
+        public virtual void DeleteById<T>(int id)
         {
             _repository.DeleteById<T>(id);
         }
 
-        public T GetById<T>(int id)
+        public virtual T GetById<T>(int id)
         {
             return _repository.GetById<T>(id);
         }
 
-        public IList<T> GetList<T>()
+        public virtual IList<T> GetList<T>()
         {
             return _repository.GetList<T>();
         }
 
-        public T Save<T>(T model)
+        public virtual T Save<T>(T model)
         {
             return _repository.Save(model);
+        }
+
+        protected virtual T ConvertTo<T>(object model)
+        {
+            if (model == null)
+            {
+                return default;
+            }
+
+            return (T)Convert.ChangeType(model, typeof(T));
         }
     }
 }

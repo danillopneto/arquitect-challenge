@@ -45,7 +45,7 @@ namespace ArquitectChallenge.Services.Repository.Events
 
         public override T GetById<T>(int id)
         {
-            return ConvertTo<T>(_dataContext.Events.Where(x => x.Id == id).FirstOrDefault());
+            return _dataContext.Events.Where(x => x.Id == id).FirstOrDefault().ConvertTo<T>();
         }
 
         public IList<EventByDate> GetEventsGroupedByHour()
@@ -67,7 +67,7 @@ namespace ArquitectChallenge.Services.Repository.Events
             return _dataContext.Events.AsNoTracking().ToList()
                             .OrderBy(x => x.Tag)
                             .ThenByDescending(x => x.Timestamp)
-                            .Select(ConvertTo<T>)                            
+                            .Select(UtilExtensions.ConvertTo<T>)                            
                             .ToList();
         }
 

@@ -30,12 +30,16 @@ namespace ArquitectChallenge.Domain.Events
             set
             {
                 _valor = value;
-                FillIsNumeric();
-                FillStatus();
             }
         }
 
         #region " DOMAIN RULES "
+
+        public void PrepareToSave()
+        {
+            FillIsNumeric();
+            FillStatus();
+        }
 
         private void FillIsNumeric()
         {
