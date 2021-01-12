@@ -32,6 +32,12 @@ namespace ArquitectChallenge.API
                 app.UseHsts();
             }
 
+            app.UseCors(builder => builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .SetIsOriginAllowed((host) => true)
+                .AllowCredentials()
+            );
             app.UseHttpsRedirection();
             app.UseMvc();
 
@@ -51,6 +57,8 @@ namespace ArquitectChallenge.API
         public void ConfigureServices(IServiceCollection services)
         {
             DependencyInjectionConfigure.ConfigureDependencies(services, Configuration);
+
+            services.AddCors();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
