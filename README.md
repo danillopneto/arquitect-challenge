@@ -83,10 +83,6 @@ Em caso de dúvida, entre em contato com o responsável pelo seu processo seleti
 ## Como utilizar
 > **Requisito:** É necessário ter o docker instalado em seu sistema operacional (Linux, Windows ou Mac)
 
-### Disponibilizar apenas o back-end
-Rode o comando (apontando a pasta local do arquivo):  
-- ` docker-compose -f docker-compose.backend.yml up --build --scale main-api=4` 
-
 ### Disponibilizar front-end e back-end
 Rode o comando (apontando a pasta local do arquivo):  
 - ` docker-compose up --build --scale main-api=4` 

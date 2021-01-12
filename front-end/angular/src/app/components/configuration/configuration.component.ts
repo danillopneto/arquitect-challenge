@@ -44,7 +44,8 @@ export class ConfigurationComponent implements OnInit {
     }
   }
 
-  onFormSubmit() {    
+  onFormSubmit() {
+    console.log('Prosseguindo...');
     this.configurationService.startApplication(
                                                this.north, 
                                                this.northeast, 

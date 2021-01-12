@@ -2,10 +2,8 @@ import { EventData } from './../../models/events/eventdata.model';
 import { Configuration } from './configuration.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable, EMPTY } from "rxjs";
-import { map, catchError } from "rxjs/operators";
+import { Observable, EMPTY, forkJoin } from "rxjs";
 import { MessageService } from '../messages/message.service';
-import { ɵELEMENT_PROBE_PROVIDERS } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +15,14 @@ export class ConfigurationService {
 
   startApplication(...configurations: Configuration[]): Observable<any> {
     var events = this.createEvents(configurations);
-    console.log(events);
-    return new Observable<any>();
+    var posts = events.map(e => this.http.post<EventData>(this.baseUrl, e));
 
-    /*return this.http.post<EventData>(this.baseUrl, configuration).pipe(
-      map((obj) => obj),
-      catchError((e) => this.errorHandler(e))
-    );/*/
+    forkJoin(posts).subscribe(result => {
+      console.log(result);
+    });
+
+    this.messageService.showMessage(`${events.length} eventos foram enviados para processamento.`);
+    return new Observable<any>();
   }
 
   createEventData(i: number, configuration: Configuration): EventData {
