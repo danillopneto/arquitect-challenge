@@ -18,7 +18,7 @@ import { HeaderComponent } from './components/template/header/header.component';
 import { NavComponent } from './components/template/nav/nav.component';
 import { FooterComponent } from './components/template/footer/footer.component';
 import { HomeComponent } from './views/home/home.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 
 /* App Directives */
@@ -38,6 +38,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { EventsReadComponent } from './components/events/events-read/events-read.component';
 
 /* Plugins */
 
@@ -49,7 +50,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     NavComponent,
     HomeComponent,
     DashboardComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    EventsReadComponent
   ],
   imports: [
     BrowserModule,

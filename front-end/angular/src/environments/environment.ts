@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apis: {
-    eventsData: 'http://localhost:8080/api/v1/Event'
+    eventsData: 'http://localhost:5500/api/v1/Event'
   }
 };
 
