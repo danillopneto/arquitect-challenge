@@ -51,6 +51,7 @@ Descrição:
 * Para visualização desses dados, sua solução deve possuir:
     * Uma tabela que mostre todos os eventos recebidos. Essa tabela deve ser atualizada automaticamente.
     > A lista com todos os eventos será retornada pela API `http://[servidor]/api/v1/Event (GET)` e apresentada no front-end conforme abaixo:
+    
     ![Todos](/front-end/screenshots/events_all.png?raw=true "Todos")
     * Um gráfico apenas para eventos com valor numérico.
     > Eventos numéricos são obtidos pela API: `http://[servidor]/api/v1/Event/GetNumericEvents`
