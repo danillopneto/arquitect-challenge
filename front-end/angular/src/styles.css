@@ -36,8 +36,9 @@ body {
 	animation: pop 1.3s infinite;
 }
 
-.f-r {
+.card-title-button {
 	float: right;
+	margin-top: -30px;
 }
 
 @keyframes pop {

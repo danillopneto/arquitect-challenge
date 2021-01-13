@@ -2,6 +2,10 @@
     <mat-card-title class="title">
         Eventos por região
     </mat-card-title>
+    <mat-slide-toggle class="card-title-button" [(ngModel)]="autoUpdate" name="autoUpdate" color="primary"
+        (change)="updateSeconds()">
+        Atualizar automaticamente
+    </mat-slide-toggle>
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="tree">
         <!-- This is the tree node template for leaf nodes -->
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>

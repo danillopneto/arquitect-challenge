@@ -14,6 +14,9 @@ export class EventsTagComponent implements OnInit {
   treeControl = new NestedTreeControl<any>(node => node.children);
   dataSource = new MatTreeNestedDataSource<GroupEventData>();
 
+  autoUpdate = false;
+  updateRunning: any;
+
   constructor(private eventsTagService: EventsTagService) {
     this.dataSource.data = new Array<any>();
   }
@@ -26,6 +29,17 @@ export class EventsTagComponent implements OnInit {
     this.eventsTagService.getAll().subscribe(events => {
       this.dataSource.data = this.prepareDataToTree(events);
     });
+  }
+
+  updateSeconds() {
+    if (this.autoUpdate) {
+      var _this = this;
+      this.updateRunning = setInterval(function () {
+        _this.loadEvents();
+      }, 5000);
+    } else {
+      clearInterval(this.updateRunning);
+    }
   }
 
   prepareDataToTree(events: GroupEventData[]): any {
