@@ -37,8 +37,7 @@ Descrição:
 ## Requisitos
 
 * Sua solução deverá ser capaz de armazenar os eventos recebidos.
-> Atendido através da API `http://[servidor]/api/v1/Event (POST)` e apresentada no front-end conforme abaixo:
-![Todos](/front-end/screenshots/events_all.png?raw=true "Todos")
+> Atendido através da API `http://[servidor]/api/v1/Event (POST)`
 
 * Considere um número de inserções de 1000 eventos/sec. Cada sensor envia um evento a cada segundo independente se seu valor foi alterado, então um sensor pode enviar um evento com o mesmo valor do segundo anterior.
 > Foi se pensado em utilizar o Rabbit MQ/Kafka para que houvesse um gerenciamento (através de filas) da grande quantidade de requisições por segundo (juntamente com um limitador *consumer*). Como o nginx fará o balanceamento de carga, ao iniciar múltiplas instâncias da API (ao menos 1 para cada região) o problema possa ser menor.
@@ -51,7 +50,8 @@ Descrição:
 
 * Para visualização desses dados, sua solução deve possuir:
     * Uma tabela que mostre todos os eventos recebidos. Essa tabela deve ser atualizada automaticamente.
-    > A lista com todos os eventos será retornada pela API: `http://[servidor]/api/v1/Event (GET)`
+    > A lista com todos os eventos será retornada pela API `http://[servidor]/api/v1/Event (GET)` e apresentada no front-end conforme abaixo:
+    ![Todos](/front-end/screenshots/events_all.png?raw=true "Todos")
     * Um gráfico apenas para eventos com valor numérico.
     > Eventos numéricos são obtidos pela API: `http://[servidor]/api/v1/Event/GetNumericEvents`
 
