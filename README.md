@@ -64,9 +64,9 @@ Descrição:
         * brasil.sul - 1500
         * brasil.sul.sensor01 - 1250
         * brasil.sul.sensor02 - 250
-> A lista com o agrupamento por região/sensor é disponibilizada pela API `http://[servidor]/api/v1/Event/GetAllGroupedByTag` e apresentada conforme abaixo:
+    > A lista com o agrupamento por região/sensor é disponibilizada pela API `http://[servidor]/api/v1/Event/GetAllGroupedByTag` e apresentada conforme abaixo:
 
-![Regiões](/front-end/screenshots/events_region.png?raw=true "Regiões")
+    ![Regiões](/front-end/screenshots/events_region.png?raw=true "Regiões")
 
 ## Avaliação
 
