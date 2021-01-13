@@ -1,6 +1,6 @@
 import { GroupEventData } from './../../../models/events/groupeventdata.model';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { EventsTagService } from './events-tag.service';
 
@@ -10,7 +10,7 @@ import { EventsTagService } from './events-tag.service';
   styleUrls: ['./events-tag.component.css']
 })
 
-export class EventsTagComponent implements OnInit {
+export class EventsTagComponent implements OnInit, OnDestroy {
   treeControl = new NestedTreeControl<any>(node => node.children);
   dataSource = new MatTreeNestedDataSource<GroupEventData>();
 
@@ -23,6 +23,10 @@ export class EventsTagComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEvents();
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.updateRunning);
   }
 
   loadEvents() {

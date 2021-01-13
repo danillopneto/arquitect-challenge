@@ -1,6 +1,6 @@
 import { EventData } from './../../../models/events/eventdata.model';
 import { EventReadService } from './events-read.service';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
@@ -11,7 +11,7 @@ import { EventsReadDataSource } from './events-read-datasource';
   templateUrl: './events-read.component.html',
   styleUrls: ['./events-read.component.css']
 })
-export class EventsReadComponent implements AfterViewInit, OnInit {
+export class EventsReadComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<EventData>;
@@ -29,6 +29,10 @@ export class EventsReadComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     this.loadEvents();
     this.updateSeconds();
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.updateRunning);
   }
 
   ngAfterViewInit() {
