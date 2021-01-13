@@ -1,3 +1,4 @@
+import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { environment } from '../environments/environment';
@@ -20,6 +21,8 @@ import { FooterComponent } from './components/template/footer/footer.component';
 import { HomeComponent } from './views/home/home.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
+import { EventsReadComponent } from './components/events/events-read/events-read.component';
+import { EventsTagComponent } from './components/events/events-tag/events-tag.component';
 
 /* App Directives */
 
@@ -38,7 +41,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { EventsReadComponent } from './components/events/events-read/events-read.component';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatIconModule } from '@angular/material/icon';
 
 /* Plugins */
 
@@ -51,7 +55,8 @@ import { EventsReadComponent } from './components/events/events-read/events-read
     HomeComponent,
     DashboardComponent,
     ConfigurationComponent,
-    EventsReadComponent
+    EventsReadComponent,
+    EventsTagComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +78,8 @@ import { EventsReadComponent } from './components/events/events-read/events-read
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
+    MatTreeModule,
+    MatIconModule,
     AppRoutingModule
   ],
   providers: [

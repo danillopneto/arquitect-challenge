@@ -1,5 +1,5 @@
 import { EventData } from './../../../models/events/eventdata.model';
-import { EventReadService } from './events-read-service';
+import { EventReadService } from './events-read.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -20,10 +20,10 @@ export class EventsReadComponent implements AfterViewInit, OnInit {
   displayedColumns = ['tag', 'timestamp', 'valor', 'status'];
 
   constructor(private eventReadService: EventReadService){
+    this.dataSource = new EventsReadDataSource([]);
   }
 
   ngOnInit() {
-    this.dataSource = new EventsReadDataSource([]);
     this.loadEvents();
   }
 
@@ -34,13 +34,13 @@ export class EventsReadComponent implements AfterViewInit, OnInit {
   }
 
   loadEvents() {
-    this.eventReadService.getAll().subscribe(products => {
-      this.setTableData(products);
+    this.eventReadService.getAll().subscribe(events => {
+      this.setTableData(events);
     });
   }
 
-  setTableData(products: EventData[]): void {
-    this.dataSource = new EventsReadDataSource(products);
+  setTableData(events: EventData[]): void {
+    this.dataSource = new EventsReadDataSource(events);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;

@@ -1,4 +1,4 @@
-<mat-card class="home mat-elevation-z3">
+<mat-card class="mat-elevation-z3">
   <mat-card-title class="title">
     Lista de todos os eventos processados
   </mat-card-title>
@@ -11,7 +11,7 @@
         <td mat-cell *matCellDef="let row">{{row.tag}}</td>
       </ng-container>
 
-      <!-- timestamp Column -->
+      <!-- Timestamp Column -->
       <ng-container matColumnDef="timestamp">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</th>
         <td mat-cell *matCellDef="let row">{{row.timestamp}}</td>
