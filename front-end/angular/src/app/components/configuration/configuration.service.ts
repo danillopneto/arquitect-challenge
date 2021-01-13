@@ -3,14 +3,17 @@ import { EventData } from './../../models/events/eventdata.model';
 import { Configuration } from './configuration.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable, EMPTY, forkJoin } from "rxjs";
+import { Observable, forkJoin } from "rxjs";
 import { MessageService } from '../messages/message.service';
 import { BaseService } from 'src/app/services/base.service';
+import { EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigurationService extends BaseService {
+  processing: EventEmitter<any> = new EventEmitter();
+
   baseUrl = environment.apis.eventsData;
 
   constructor(private http: HttpClient, protected messageService: MessageService) {
@@ -21,12 +24,14 @@ export class ConfigurationService extends BaseService {
     var events = this.createEvents(configurations);
     var posts = events.map(e => this.http.post<EventData>(this.baseUrl, e));
 
-    forkJoin(posts).subscribe(result => {
-      console.log(result);
-    });
+    this.processing.emit(posts);
 
-    this.messageService.showMessage(`${events.length} eventos foram enviados para processamento.`);
+    this.messageService.showMessage(`${events.length} sensores foram enviados para processamento.`);
     return new Observable<any>();
+  }
+
+  stopApplication() {
+    this.processing.emit();
   }
 
   createEventData(i: number, configuration: Configuration): EventData {

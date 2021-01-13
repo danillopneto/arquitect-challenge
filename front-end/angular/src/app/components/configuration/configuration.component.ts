@@ -32,24 +32,29 @@ export class ConfigurationComponent implements OnInit {
     sensors: null
   };
 
-  constructor(private configurationService: ConfigurationService) {    
+  constructor(private configurationService: ConfigurationService) {
   }
 
   ngOnInit(): void {
   }
 
-  turnOnOff(configuration: Configuration){
+  turnOnOff(configuration: Configuration) {
     if (!configuration.enabled) {
       configuration.sensors = null;
     }
   }
 
-  onFormSubmit() {
-    console.log('Prosseguindo...');
+  turnOn() {
+    console.log("Processing...");
     this.configurationService.startApplication(
-                                               this.north, 
-                                               this.northeast, 
-                                               this.south, 
-                                               this.southeast);
+      this.north,
+      this.northeast,
+      this.south,
+      this.southeast);
+  }
+
+  turnOff() {
+    console.log("Stopping...");
+    this.configurationService.stopApplication();
   }
 }
