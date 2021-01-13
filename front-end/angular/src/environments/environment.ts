@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   apis: {
     eventsData: 'http://localhost:5500/api/v1/Event'
-  }
+  },
+  eventsPerSecond: 1000
 };
 
 /*

@@ -13,8 +13,8 @@ import { EventEmitter } from '@angular/core';
 })
 export class ConfigurationService extends BaseService {
   running: boolean = false;
-  processing: EventEmitter<any> = new EventEmitter();
-  sensors!: Configuration[];
+  configurations!: Configuration[];
+  eventsRunning: any;
 
   baseUrl = environment.apis.eventsData;
 
@@ -23,13 +23,13 @@ export class ConfigurationService extends BaseService {
   }
 
   getConfigurations(): Configuration[] {
-    if (this.sensors != null) {
-      return this.sensors;
+    if (this.configurations != null) {
+      return this.configurations;
     }
 
-    this.sensors = new Array<Configuration>();
+    this.configurations = new Array<Configuration>();
 
-    this.sensors.push({
+    this.configurations.push({
       description: 'brasil.norte',
       enabled: false,
       sensors: null
@@ -47,25 +47,34 @@ export class ConfigurationService extends BaseService {
       sensors: null
     });
 
-    return this.sensors;
+    return this.configurations;
   }
 
   startApplication(configurations: Configuration[]): Observable<any> {
-    this.sensors = configurations;
+    console.log("Starting...");
 
-    var events = this.createEvents(configurations);
-    var posts = events.map(e => this.http.post<EventData>(this.baseUrl, e));
+    this.configurations = configurations;
+    
+    var _this = this;
+    this.eventsRunning = setInterval(function () {
+      var events = _this.createEvents(configurations);
+      var posts = events.map(e => _this.http.post<EventData>(_this.baseUrl, e));
 
-    this.processing.emit(posts);
+      forkJoin(posts).subscribe(result => {
+        console.log(result);
+      });
+    }, environment.eventsPerSecond);
 
-    this.messageService.showMessage(`${events.length} sensores foram enviados para processamento.`);
+    this.messageService.showMessage(`${configurations.reduce((acc, config) => acc += config.sensors!, 0)} sensores foram enviados para processamento.`);
     this.running = true;
     return new Observable<any>();
   }
 
   stopApplication() {
+    /* Stopping current sensors runnings */
+    console.log("Stopping...");
+    clearInterval(this.eventsRunning);
     this.running = false;
-    this.processing.emit();
   }
 
   createEventData(i: number, configuration: Configuration): EventData {

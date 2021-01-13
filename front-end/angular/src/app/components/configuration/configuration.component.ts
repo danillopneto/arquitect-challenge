@@ -17,7 +17,6 @@ export class ConfigurationComponent implements OnInit {
 
   ngOnInit(): void {
     this.configurations = this.configurationService.getConfigurations();
-    console.log(this.configurations);
   }
 
   turnOnOff(configuration: Configuration) {
@@ -27,16 +26,12 @@ export class ConfigurationComponent implements OnInit {
   }
 
   turnOn() {
-    console.log("Processing...");
     this.configurationService.startApplication(this.configurations);
-
     this.formEnabled = false;
   }
 
   turnOff() {
-    console.log("Stopping...");
     this.configurationService.stopApplication();
-
     this.formEnabled = true;
   }
 }
