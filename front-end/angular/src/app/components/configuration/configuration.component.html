@@ -2,14 +2,14 @@
     <mat-card class="sensor-card" *ngFor="let configuration of configurations; let i = index" [attr.data-index]="i">
         <mat-card-content>
             <div class="sensor">
-                <mat-slide-toggle [(ngModel)]="configurations[i].enabled" name="configurarions[{{i}}].enabled"
+                <mat-slide-toggle [(ngModel)]="configurations[i].enabled" name="configurations[{{i}}].enabled"
                     color="primary" (change)="turnOnOff(configuration)" [disabled]="!formEnabled">
                     {{ configuration.description }}
                 </mat-slide-toggle>
                 <mat-form-field>
                     <input matInput [disabled]="!formEnabled || !configuration.enabled"
                         placeholder="Quantidade de sensores" [(ngModel)]="configurations[i].sensors"
-                        name="configurarions[{{i}}].sensors" type="number">
+                        name="configurations[{{i}}].sensors" type="number">
                 </mat-form-field>
             </div>
         </mat-card-content>
