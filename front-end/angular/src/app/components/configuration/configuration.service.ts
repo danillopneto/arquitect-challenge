@@ -31,7 +31,7 @@ export class ConfigurationService extends BaseService {
 
   createEventData(i: number, configuration: Configuration): EventData {
     var sensorNumber = (i + 1).toString();
-    var sensorSufix = i.toString().length == 1 ? '0'.concat(sensorNumber) : sensorNumber;
+    var sensorSufix = sensorNumber.length == 1 ? '0'.concat(sensorNumber) : sensorNumber;
     var sensorName = configuration.description.concat('.sensor', sensorSufix);
 
     var timestamp = new Date().getTime();
