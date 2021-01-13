@@ -17,20 +17,35 @@ export class EventsReadComponent implements AfterViewInit, OnInit {
   @ViewChild(MatTable) table!: MatTable<EventData>;
   dataSource!: EventsReadDataSource;
 
+  autoUpdate = true;
+  updateRunning: any;
+
   displayedColumns = ['tag', 'timestamp', 'valor', 'status'];
 
-  constructor(private eventReadService: EventReadService){
+  constructor(private eventReadService: EventReadService) {
     this.dataSource = new EventsReadDataSource([]);
   }
 
   ngOnInit() {
     this.loadEvents();
+    this.updateSeconds();
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+  }
+
+  updateSeconds() {
+    if (this.autoUpdate) {
+      var _this = this;
+      this.updateRunning = setInterval(function () {
+        _this.loadEvents();
+      }, 5000);
+    } else {
+      clearInterval(this.updateRunning);
+    }
   }
 
   loadEvents() {

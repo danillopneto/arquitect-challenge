@@ -2,7 +2,9 @@
   <mat-card-title class="title">
     Lista de todos os eventos processados
   </mat-card-title>
-
+  <mat-slide-toggle class="f-r" [(ngModel)]="autoUpdate" name="autoUpdate" color="primary" (change)="updateSeconds()">
+    Atualizar automaticamente
+  </mat-slide-toggle>
   <div>
     <table mat-table class="full-width-table" matSort aria-label="Elements">
       <!-- Tag Column -->
