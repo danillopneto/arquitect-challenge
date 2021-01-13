@@ -1,61 +1,24 @@
 <form class="configuration-form">
-    <mat-card class="sensor-card">
+    <mat-card class="sensor-card" *ngFor="let configuration of configurations; let i = index" [attr.data-index]="i">
         <mat-card-content>
-            <div class="north-sensor">
-                <mat-slide-toggle [(ngModel)]="north.enabled" name="north.enabled" color="primary"
-                    (change)="turnOnOff(north)">
-                    {{ north.description }}
+            <div class="sensor">
+                <mat-slide-toggle [(ngModel)]="configurations[i].enabled" name="configurarions[{{i}}].enabled"
+                    color="primary" (change)="turnOnOff(configuration)" [disabled]="!formEnabled">
+                    {{ configuration.description }}
                 </mat-slide-toggle>
                 <mat-form-field>
-                    <input matInput [disabled]="!north.enabled" placeholder="Quantidade de sensores"
-                        [(ngModel)]="north.sensors" name="north.sensors" type="number">
-                </mat-form-field>
-            </div>
-        </mat-card-content>
-    </mat-card>
-    <mat-card class="sensor-card">
-        <mat-card-content>
-            <div class="northeast-sensor">
-                <mat-slide-toggle [(ngModel)]="northeast.enabled" name="northeast.enabled" color="primary"
-                    (change)="turnOnOff(northeast)">
-                    {{ northeast.description }}
-                </mat-slide-toggle>
-                <mat-form-field>
-                    <input matInput [disabled]="!northeast.enabled" placeholder="Quantidade de sensores"
-                        [(ngModel)]="northeast.sensors" name="northeast.sensors" type="number">
-                </mat-form-field>
-            </div>
-        </mat-card-content>
-    </mat-card>
-    <mat-card class="sensor-card">
-        <mat-card-content>
-            <div class="south-sensor">
-                <mat-slide-toggle [(ngModel)]="south.enabled" name="enabled" color="primary"
-                    (change)="turnOnOff(south)">
-                    {{ south.description }}
-                </mat-slide-toggle>
-                <mat-form-field>
-                    <input matInput [disabled]="!south.enabled" placeholder="Quantidade de sensores"
-                        [(ngModel)]="south.sensors" name="south.sensors" type="number">
-                </mat-form-field>
-            </div>
-        </mat-card-content>
-    </mat-card>
-    <mat-card class="sensor-card">
-        <mat-card-content>
-            <div class="southeast-sensor">
-                <mat-slide-toggle [(ngModel)]="southeast.enabled" name="enabled" color="primary"
-                    (change)="turnOnOff(southeast)">
-                    {{ southeast.description }}
-                </mat-slide-toggle>
-                <mat-form-field>
-                    <input matInput [disabled]="!southeast.enabled" placeholder="Quantidade de sensores"
-                        [(ngModel)]="southeast.sensors" name="southeast.sensors" type="number">
+                    <input matInput [disabled]="!formEnabled || !configuration.enabled"
+                        placeholder="Quantidade de sensores" [(ngModel)]="configurations[i].sensors"
+                        name="configurarions[{{i}}].sensors" type="number">
                 </mat-form-field>
             </div>
         </mat-card-content>
     </mat-card>
     <br>
-    <button mat-raised-button type="button" color="primary" (click)="turnOn()">Ligar sensores</button>
-    <button mat-raised-button type="button" (click)="turnOff()">Desligar sensores</button>
+    <button mat-raised-button type="button" color="primary" (click)="turnOn()" [disabled]="!formEnabled">
+        Ligar sensores
+    </button>
+    <button mat-raised-button type="button" (click)="turnOff()" [disabled]="formEnabled">
+        Desligar sensores
+    </button>
 </form>

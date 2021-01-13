@@ -12,7 +12,9 @@ import { EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class ConfigurationService extends BaseService {
+  running: boolean = false;
   processing: EventEmitter<any> = new EventEmitter();
+  sensors!: Configuration[];
 
   baseUrl = environment.apis.eventsData;
 
@@ -20,17 +22,49 @@ export class ConfigurationService extends BaseService {
     super(messageService);
   }
 
-  startApplication(...configurations: Configuration[]): Observable<any> {
+  getConfigurations(): Configuration[] {
+    if (this.sensors != null) {
+      return this.sensors;
+    }
+
+    this.sensors = new Array<Configuration>();
+
+    this.sensors.push({
+      description: 'brasil.norte',
+      enabled: false,
+      sensors: null
+    }, {
+      description: 'brasil.nordeste',
+      enabled: false,
+      sensors: null
+    }, {
+      description: 'brasil.sul',
+      enabled: false,
+      sensors: null
+    }, {
+      description: 'brasil.sudeste',
+      enabled: false,
+      sensors: null
+    });
+
+    return this.sensors;
+  }
+
+  startApplication(configurations: Configuration[]): Observable<any> {
+    this.sensors = configurations;
+
     var events = this.createEvents(configurations);
     var posts = events.map(e => this.http.post<EventData>(this.baseUrl, e));
 
     this.processing.emit(posts);
 
     this.messageService.showMessage(`${events.length} sensores foram enviados para processamento.`);
+    this.running = true;
     return new Observable<any>();
   }
 
   stopApplication() {
+    this.running = false;
     this.processing.emit();
   }
 

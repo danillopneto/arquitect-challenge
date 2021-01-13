@@ -8,34 +8,16 @@ import { ConfigurationService } from './configuration.service';
   styleUrls: ['./configuration.component.css']
 })
 export class ConfigurationComponent implements OnInit {
-  north: Configuration = {
-    description: 'brasil.norte',
-    enabled: false,
-    sensors: null
-  };
-
-  northeast: Configuration = {
-    description: 'brasil.nordeste',
-    enabled: false,
-    sensors: null
-  };
-
-  south: Configuration = {
-    description: 'brasil.sul',
-    enabled: false,
-    sensors: null
-  };
-
-  southeast: Configuration = {
-    description: 'brasil.sudeste',
-    enabled: false,
-    sensors: null
-  };
+  formEnabled: boolean = true;
+  configurations!: Configuration[];
 
   constructor(private configurationService: ConfigurationService) {
+    this.formEnabled = !configurationService.running;
   }
 
   ngOnInit(): void {
+    this.configurations = this.configurationService.getConfigurations();
+    console.log(this.configurations);
   }
 
   turnOnOff(configuration: Configuration) {
@@ -46,15 +28,15 @@ export class ConfigurationComponent implements OnInit {
 
   turnOn() {
     console.log("Processing...");
-    this.configurationService.startApplication(
-      this.north,
-      this.northeast,
-      this.south,
-      this.southeast);
+    this.configurationService.startApplication(this.configurations);
+
+    this.formEnabled = false;
   }
 
   turnOff() {
     console.log("Stopping...");
     this.configurationService.stopApplication();
+
+    this.formEnabled = true;
   }
 }
