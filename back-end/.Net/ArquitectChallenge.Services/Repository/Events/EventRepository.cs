@@ -65,8 +65,8 @@ namespace ArquitectChallenge.Services.Repository.Events
         public override IList<T> GetList<T>()
         {
             return _dataContext.Events.AsNoTracking().ToList()
-                            .OrderBy(x => x.Tag)
-                            .ThenByDescending(x => x.Timestamp)
+                            .OrderByDescending(x => x.Timestamp)
+                            .ThenBy(x => x.Tag)
                             .Select(UtilExtensions.ConvertTo<T>)                            
                             .ToList();
         }

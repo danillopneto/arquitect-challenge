@@ -78,11 +78,11 @@ Em caso de dúvida, entre em contato com o responsável pelo seu processo seleti
 
 ## Solução
 
-* Foi criada uma aplicação com as seguintes tecnologias:
+* Foram criadas aplicações com as seguintes tecnologias:
     - [x] Back-end em .NET Core 2.1 *(seguindo a restrição definida no trecho referente ao ambiente)*
         * WebAPI no padrão REST com documentação feita via Swagger.
         * EntityFramework como ORM e banco de dados MySql.    
-    - [ ] Front-end em Angular 11
+    - [x] Front-end em Angular 11
     
 ## Como utilizar
 > **Requisito:** É necessário ter o docker instalado em seu sistema operacional (Linux, Windows ou Mac)
