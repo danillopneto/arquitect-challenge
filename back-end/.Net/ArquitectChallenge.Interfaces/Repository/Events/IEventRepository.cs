@@ -13,5 +13,7 @@ namespace ArquitectChallenge.Interfaces.Repository.Events
         IList<EventData> GetNewestEvents(int lastEventId);
 
         IList<EventData> GetNumericEvents();
+        
+        IList<NumericEventsData> GetNumericEventsData(DateTime date);
     }
 }

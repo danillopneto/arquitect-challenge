@@ -139,6 +139,36 @@ namespace ArquitectChallenge.API.Controllers
         }
 
         /// <summary>
+        /// Get numeric events data.
+        /// </summary>
+        /// <param name="date">The date of events.</param>
+        /// <returns>The list of numeric events data.</returns>
+        /// <response code="200">Success by getting the events.</response>
+        /// <response code="408">Timeout by getting the events.</response>
+        /// <response code="500">Internal error by getting the events.</response>
+        [HttpGet]
+        [Route("GetNumericEventsData")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public ActionResult GetNumericEventsData(DateTime date)
+        {
+            try
+            {
+                var result = _service.GetNumericEventsData(date);
+                return Ok(result);
+            }
+            catch (TimeoutException)
+            {
+                return StatusCode((int)HttpStatusCode.RequestTimeout);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        /// <summary>
         /// Saving the event.
         /// </summary>
         /// <param name="model">Event data.</param>

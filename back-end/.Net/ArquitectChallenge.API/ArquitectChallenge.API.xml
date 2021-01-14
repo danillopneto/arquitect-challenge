@@ -128,6 +128,16 @@
             <response code="408">Timeout by getting the events.</response>
             <response code="500">Internal error by getting the events.</response>
         </member>
+        <member name="M:ArquitectChallenge.API.Controllers.EventController.GetNumericEventsData(System.DateTime)">
+            <summary>
+            Get numeric events data.
+            </summary>
+            <param name="date">The date of events.</param>
+            <returns>The list of numeric events data.</returns>
+            <response code="200">Success by getting the events.</response>
+            <response code="408">Timeout by getting the events.</response>
+            <response code="500">Internal error by getting the events.</response>
+        </member>
         <member name="M:ArquitectChallenge.API.Controllers.EventController.Save(ArquitectChallenge.Domain.Events.EventData)">
             <summary>
             Saving the event.

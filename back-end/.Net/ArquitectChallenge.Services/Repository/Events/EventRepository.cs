@@ -62,6 +62,32 @@ namespace ArquitectChallenge.Services.Repository.Events
                         .ToList();
         }
 
+        public IList<NumericEventsData> GetNumericEventsData(DateTime date)
+        {
+            var groupped = _dataContext.Events
+                                .Where(x => x.IsNumeric
+                                        && x.Timestamp.UnixTimeStampToDateTime().Date == date.Date)
+                                .GroupBy(x => x.Tag)
+                                .ToList();
+
+            var grouppedByNumber = new List<NumericEventsData>();
+            foreach (var tag in groupped)
+            {
+                var group = new NumericEventsData
+                {
+                    Start = Convert.ToInt32(tag.First(x => x.Timestamp == tag.Min(t => t.Timestamp)).Valor),
+                    Maximum = tag.Max(x => Convert.ToInt32(x.Valor)),
+                    Minimum = tag.Min(x => Convert.ToInt32(x.Valor)),
+                    End = Convert.ToInt32(tag.First(x => x.Timestamp == tag.Max(t => t.Timestamp)).Valor),
+                    Tag = tag.Key,
+                };
+
+                grouppedByNumber.Add(group);
+            }
+
+            return grouppedByNumber;
+        }
+
         protected override void UpdateItem(EventData currentItem, EventData updatedItem)
         {
             currentItem.Tag = updatedItem.Tag;

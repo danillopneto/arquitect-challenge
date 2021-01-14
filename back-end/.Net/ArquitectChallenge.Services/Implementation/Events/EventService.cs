@@ -33,6 +33,11 @@ namespace ArquitectChallenge.Services.Implementation.Events
             return _repository.GetNumericEvents();
         }
 
+        public IList<NumericEventsData> GetNumericEventsData(DateTime date)
+        {
+            return _repository.GetNumericEventsData(date);
+        }
+
         public override T Save<T>(T model)
         {
             /* Preparing object to be saved. */
