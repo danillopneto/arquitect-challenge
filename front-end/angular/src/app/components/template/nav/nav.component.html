@@ -15,7 +15,7 @@
 </mat-toolbar>
 <mat-sidenav-container class="container" [class.is-mobile]="mobileQuery.matches">
     <mat-sidenav class="sidenav" [opened]="isMobile ? null : ''" color="primary" #menu fixedTopGap="64"
-        [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="isMobile ? null : true">
+        [mode]="mobileQuery.matches ? 'over' : 'side'">
         <mat-nav-list class="nav-list">
             <a mat-list-item routerLink="/" (click)="isMobile ? menu.close() : null">
                 <i class="material-icons">

@@ -13,7 +13,7 @@ import { Color, Label } from 'ng2-charts';
 export class EventsByhourComponent implements OnInit, OnDestroy {
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [...Array(24).keys()].map((e) => e.toString().padStart(2, '0').concat(':00'));
-  public lineChartOptions: ChartOptions = { responsive: false };
+  public lineChartOptions: ChartOptions = { responsive: true };
   public lineChartColors: Color[] = [
     {
       borderColor: 'black',
@@ -21,7 +21,6 @@ export class EventsByhourComponent implements OnInit, OnDestroy {
     },
   ];
   public lineChartLegend = true;
-  public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
 
   groupData: GroupEventByHour[] = new Array<GroupEventByHour>();

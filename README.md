@@ -46,7 +46,8 @@ Descrição:
 > Regra definida na camada de domínio e sempre executada antes da gravação do evento.
 
 * Sua API deverá apresentar métricas sobre o volume de eventos recebidos por hora.
-> Estas métricas podem ser obtidas através da API: `http://[servidor]/api/v1/Event/GetEventsGroupedByHour`
+> Estas métricas podem ser obtidas através da API `http://[servidor]/api/v1/Event/GetEventsGroupedByHour` e apresentado por região ou por sensor (atualmente só para o dia corrente):
+![Por hora](/front-end/screenshots/events_hour.png?raw=true "Por hora")
 
 * Para visualização desses dados, sua solução deve possuir:
     * Uma tabela que mostre todos os eventos recebidos. Essa tabela deve ser atualizada automaticamente.

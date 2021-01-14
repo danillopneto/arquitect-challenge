@@ -9,7 +9,7 @@
                 <mat-form-field>
                     <input matInput [disabled]="!formEnabled || !configuration.enabled"
                         placeholder="Quantidade de sensores" [(ngModel)]="configurations[i].sensors"
-                        name="configurations[{{i}}].sensors" type="number">
+                        name="configurations[{{i}}].sensors" type="number" max="5">
                 </mat-form-field>
             </div>
         </mat-card-content>
