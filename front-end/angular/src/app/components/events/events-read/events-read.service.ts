@@ -23,4 +23,11 @@ export class EventReadService extends BaseService {
       catchError((e) => this.errorHandler(e))
     );
   }
+
+  getNewestEvents(lastEventId: number): Observable<EventData[]> {
+    return this.http.get<EventData[]>(`${this.baseUrl}/GetNewestEvents?lastEventId=${lastEventId}`).pipe(
+      map((obj) => obj),
+      catchError((e) => this.errorHandler(e))
+    );
+  }
 }

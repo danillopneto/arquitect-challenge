@@ -61,7 +61,7 @@ export class ConfigurationService extends BaseService {
       var posts = events.map(e => _this.http.post<EventData>(_this.baseUrl, e));
 
       forkJoin(posts).subscribe(result => {
-        console.log(result);
+        //console.log(result);
       });
     }, environment.eventsPerSecond);
 
