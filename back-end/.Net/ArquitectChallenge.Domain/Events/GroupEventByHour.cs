@@ -2,8 +2,12 @@
 {
     public class GroupEventByHour
     {
+        public int Count { get; set; }
+
+        public bool IsRegion { get; set; }
+
         public string Tag { get; set; }
 
-        public int[] EventsByHour { get; set; }
+        public long TimeStamp { get; set; }
     }
 }

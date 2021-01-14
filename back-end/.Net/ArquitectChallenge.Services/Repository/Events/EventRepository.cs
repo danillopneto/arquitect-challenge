@@ -1,10 +1,12 @@
 ﻿using ArquitectChallenge.Domain.Events;
 using ArquitectChallenge.Domain.Utilities;
 using ArquitectChallenge.Interfaces.Repository.Events;
+using ArquitectChallenge.Services.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace ArquitectChallenge.Services.Repository.Events
 {
@@ -16,31 +18,9 @@ namespace ArquitectChallenge.Services.Repository.Events
 
         public IList<GroupEventByTag> GetAllGroupedByTag()
         {
-            var groupped = _dataContext.Events.AsNoTracking()
-                                .Where(x => !string.IsNullOrWhiteSpace(x.Tag))
-                                .GroupBy(x => x.Tag)
-                                .Select(x => new GroupEventByTag
-                                {
-                                    Tag = x.Key,
-                                    Count = x.Count()
-                                }).ToList();
-            if (groupped.Count > 0)
-            {
-                groupped.AddRange(groupped.Where(x => !string.IsNullOrWhiteSpace(x.FirstTag()))
-                            .GroupBy(x => x.FirstTag()).Select(x => new GroupEventByTag
-                            {
-                                Tag = x.Key,
-                                Count = x.Sum(c => c.Count)
-                            }).ToList());
-
-                groupped.AddRange(groupped.Where(x => !string.IsNullOrWhiteSpace(x.SecondTag()))
-                            .GroupBy(x => x.SecondTag()).Select(x => new GroupEventByTag
-                            {
-                                Tag = x.Key,
-                                Count = x.Sum(c => c.Count)
-                            }).ToList());
-            }
-
+            var groupped = _dataContext
+                                .SqlQuery<GroupEventByTag>(GetSqlGrouppedByTag().ToString())
+                                .ToList();
             return groupped.OrderBy(x => x.Tag).ToList();
         }
 
@@ -51,28 +31,9 @@ namespace ArquitectChallenge.Services.Repository.Events
 
         public IList<GroupEventByHour> GetEventsGroupedByHour(DateTime date)
         {
-            var events = _dataContext.Events
-                            .Where(x => x.Timestamp.UnixTimeStampToDateTime().Date == date.Date)
-                            .OrderBy(x => x.Tag)
-                            .ThenBy(x => x.Timestamp)
-                            .GroupBy(x => x.Tag)
+            var groupped = _dataContext
+                            .SqlQuery<GroupEventByHour>(GetSqlGrouppedByHour(date).ToString())
                             .ToList();
-
-            var groupped = new List<GroupEventByHour>();
-            foreach (var tag in events)
-            {
-                var eventsByHour = new int[24];
-                foreach (var eventData in tag.GroupBy(x => x.Timestamp.UnixTimeStampToDateTime().Hour))
-                {
-                    if (eventsByHour.Length >= eventData.Key)
-                    {
-                        eventsByHour[eventData.Key] = eventData.Count();
-                    }
-                }
-
-                groupped.Add(new GroupEventByHour { Tag = tag.Key, EventsByHour = eventsByHour });
-            }
-
             return groupped;
         }
 
@@ -106,6 +67,60 @@ namespace ArquitectChallenge.Services.Repository.Events
             currentItem.Tag = updatedItem.Tag;
             currentItem.Timestamp = updatedItem.Timestamp;
             currentItem.Valor = updatedItem.Valor;
+        }
+
+        private StringBuilder GetSqlGrouppedByHour(DateTime date)
+        {
+            var sql = new StringBuilder();
+            sql.AppendLine("SELECT ");
+            sql.AppendLine("	COUNT, ");
+            sql.AppendLine("	FINALTAG AS TAG, ");
+            sql.AppendLine("    DIA AS `TIMESTAMP`, ");
+            sql.AppendLine("    ISREGION ");
+            sql.AppendLine("FROM (SELECT ");
+            sql.AppendLine("COUNT(*) AS COUNT, ");
+            sql.AppendLine("SUBSTRING_INDEX(TAG, '.', 2) AS FINALTAG, ");
+            sql.AppendLine("UNIX_TIMESTAMP(FROM_UNIXTIME(`TIMESTAMP` / 1000, '%Y-%m-%d %h:00')) AS DIA, ");
+            sql.AppendLine("TRUE AS ISREGION ");
+            sql.AppendLine("FROM EVENTDATA ");
+            sql.AppendLine("WHERE ");
+            sql.AppendFormat("	FROM_UNIXTIME(`TIMESTAMP` / 1000, '%Y-%m-%d') = '{0}' ", date.ToString("yyyy-MM-dd"));
+            sql.AppendLine("GROUP BY FINALTAG, DIA ");
+            sql.AppendLine("UNION ");
+            sql.AppendLine("SELECT ");
+            sql.AppendLine("COUNT(*) AS COUNT, ");
+            sql.AppendLine("TAG AS FINALTAG, ");
+            sql.AppendLine("UNIX_TIMESTAMP(FROM_UNIXTIME(`TIMESTAMP` / 1000, '%Y-%m-%d %h:00')) AS DIA, ");
+            sql.AppendLine("FALSE AS ISREGION ");
+            sql.AppendLine("FROM EVENTDATA ");
+            sql.AppendLine("WHERE ");
+            sql.AppendFormat("	FROM_UNIXTIME(`TIMESTAMP` / 1000, '%Y-%m-%d') = '{0}' ", date.ToString("yyyy-MM-dd"));
+            sql.AppendLine("GROUP BY TAG, DIA) BYHOUR ");
+            sql.AppendLine("ORDER BY `TIMESTAMP`, FINALTAG; ");
+            return sql;
+        }
+
+        private StringBuilder GetSqlGrouppedByTag()
+        {
+            var sql = new StringBuilder();
+            sql.AppendLine("SELECT COUNT, FINALTAG AS TAG FROM(SELECT ");
+            sql.AppendLine("COUNT(*) AS COUNT, ");
+            sql.AppendLine("SUBSTRING_INDEX(TAG, '.', 1) AS FINALTAG ");
+            sql.AppendLine("FROM EVENTDATA ");
+            sql.AppendLine("GROUP BY FINALTAG ");
+            sql.AppendLine("UNION ");
+            sql.AppendLine("SELECT ");
+            sql.AppendLine("COUNT(*) AS COUNT, ");
+            sql.AppendLine("SUBSTRING_INDEX(TAG, '.', 2) AS FINALTAG ");
+            sql.AppendLine("FROM EVENTDATA ");
+            sql.AppendLine("GROUP BY FINALTAG) PARENTTAGS ");
+            sql.AppendLine("UNION ");
+            sql.AppendLine("SELECT ");
+            sql.AppendLine("COUNT(*) AS COUNT, ");
+            sql.AppendLine("TAG ");
+            sql.AppendLine("FROM EVENTDATA TAG ");
+            sql.AppendLine("GROUP BY TAG");
+            return sql;
         }
     }
 }
