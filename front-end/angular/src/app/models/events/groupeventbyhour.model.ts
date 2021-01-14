@@ -1,4 +1,6 @@
 export interface GroupEventByHour {
+    count: number,
     tag: string,
-    eventsByHour: number[]
+    timestamp: number,
+    isRegion: boolean
 }

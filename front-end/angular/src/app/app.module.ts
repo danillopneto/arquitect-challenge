@@ -42,6 +42,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 
 /* Plugins */
 import { ChartsModule } from 'ng2-charts';
@@ -81,6 +82,7 @@ import { ChartsModule } from 'ng2-charts';
     MatDialogModule,
     MatTreeModule,
     MatIconModule,
+    MatRadioModule,
     ChartsModule,
     AppRoutingModule
   ],

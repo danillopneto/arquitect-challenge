@@ -10,4 +10,13 @@
         [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" chartType="line"
         [plugins]="lineChartPlugins">
     </canvas>
+    <div class="center">
+        <div class="center">
+            <mat-radio-group aria-label="Tipo de gráfico" class="chart-options" [(ngModel)]="chartType"
+                (change)="changeChartType()">
+                <mat-radio-button value="1">Por região</mat-radio-button>
+                <mat-radio-button value="2">Por sensor</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </div>
 </mat-card>
