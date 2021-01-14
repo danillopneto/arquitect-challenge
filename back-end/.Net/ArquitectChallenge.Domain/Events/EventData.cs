@@ -13,10 +13,10 @@ namespace ArquitectChallenge.Domain.Events
         [Column("Tag")]
         public string Tag { get; set; }
 
-        [Range(1, double.MaxValue)]
+        [Range(1, long.MaxValue)]
         [Required]
         [Column("Timestamp")]
-        public double Timestamp { get; set; }
+        public long Timestamp { get; set; }
 
         [Column("Valor")]
         public string Valor { get; set; }
