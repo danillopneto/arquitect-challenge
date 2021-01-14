@@ -21,6 +21,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 import { EventsReadComponent } from './components/events/events-read/events-read.component';
 import { EventsTagComponent } from './components/events/events-tag/events-tag.component';
+import { EventsByhourComponent } from './components/events/events-byhour/events-byhour.component';
 
 /* App Directives */
 
@@ -43,6 +44,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
 
 /* Plugins */
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { MatIconModule } from '@angular/material/icon';
     DashboardComponent,
     ConfigurationComponent,
     EventsReadComponent,
-    EventsTagComponent
+    EventsTagComponent,
+    EventsByhourComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +81,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatDialogModule,
     MatTreeModule,
     MatIconModule,
+    ChartsModule,
     AppRoutingModule
   ],
   providers: [

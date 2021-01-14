@@ -41,6 +41,16 @@ body {
 	margin-top: -30px;
 }
 
+.mt-card {
+	margin-top: 20px;
+}
+
+.center {
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+}
+
 @keyframes pop {
 	0% {
 		transform: translate(0%, 0%) scale(1.25, 0.75);
