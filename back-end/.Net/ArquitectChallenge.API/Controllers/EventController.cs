@@ -50,9 +50,10 @@ namespace ArquitectChallenge.API.Controllers
         }
 
         /// <summary>
-        /// Get events groupped by date and hour.
+        /// Get events groupped by hour.
         /// </summary>
-        /// <returns>The list of events groupped by date and hour.</returns>
+        /// <param name="date">The date of events.</param>
+        /// <returns>The list of events groupped by hour.</returns>
         /// <response code="200">Success by getting the events.</response>
         /// <response code="408">Timeout by getting the events.</response>
         /// <response code="500">Internal error by getting the events.</response>
@@ -61,11 +62,11 @@ namespace ArquitectChallenge.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public ActionResult GetEventsGroupedByHour()
+        public ActionResult GetEventsGroupedByHour(DateTime date)
         {
             try
             {
-                var result = _service.GetEventsGroupedByHour();
+                var result = _service.GetEventsGroupedByHour(date);
                 return Ok(result);
             }
             catch (TimeoutException)

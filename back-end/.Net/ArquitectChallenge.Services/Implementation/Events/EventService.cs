@@ -2,6 +2,7 @@
 using ArquitectChallenge.Domain.Utilities;
 using ArquitectChallenge.Interfaces.Repository.Events;
 using ArquitectChallenge.Interfaces.Services.Events;
+using System;
 using System.Collections.Generic;
 
 namespace ArquitectChallenge.Services.Implementation.Events
@@ -12,14 +13,14 @@ namespace ArquitectChallenge.Services.Implementation.Events
         {
         }
 
-        public IList<GroupEventData> GetAllGroupedByTag()
+        public IList<GroupEventByTag> GetAllGroupedByTag()
         {
             return _repository.GetAllGroupedByTag();
         }
 
-        public IList<EventByDate> GetEventsGroupedByHour()
+        public IList<GroupEventByHour> GetEventsGroupedByHour(DateTime date)
         {
-            return _repository.GetEventsGroupedByHour();
+            return _repository.GetEventsGroupedByHour(date);
         }
 
         public IList<EventData> GetNewestEvents(int lastEventId)

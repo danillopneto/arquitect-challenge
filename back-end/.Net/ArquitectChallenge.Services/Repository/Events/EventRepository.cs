@@ -2,6 +2,7 @@
 using ArquitectChallenge.Domain.Utilities;
 using ArquitectChallenge.Interfaces.Repository.Events;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,12 +14,12 @@ namespace ArquitectChallenge.Services.Repository.Events
         {
         }
 
-        public IList<GroupEventData> GetAllGroupedByTag()
+        public IList<GroupEventByTag> GetAllGroupedByTag()
         {
             var groupped = _dataContext.Events.AsNoTracking()
                                 .Where(x => !string.IsNullOrWhiteSpace(x.Tag))
                                 .GroupBy(x => x.Tag)
-                                .Select(x => new GroupEventData
+                                .Select(x => new GroupEventByTag
                                 {
                                     Tag = x.Key,
                                     Count = x.Count()
@@ -26,14 +27,14 @@ namespace ArquitectChallenge.Services.Repository.Events
             if (groupped.Count > 0)
             {
                 groupped.AddRange(groupped.Where(x => !string.IsNullOrWhiteSpace(x.FirstTag()))
-                            .GroupBy(x => x.FirstTag()).Select(x => new GroupEventData
+                            .GroupBy(x => x.FirstTag()).Select(x => new GroupEventByTag
                             {
                                 Tag = x.Key,
                                 Count = x.Sum(c => c.Count)
                             }).ToList());
 
                 groupped.AddRange(groupped.Where(x => !string.IsNullOrWhiteSpace(x.SecondTag()))
-                            .GroupBy(x => x.SecondTag()).Select(x => new GroupEventData
+                            .GroupBy(x => x.SecondTag()).Select(x => new GroupEventByTag
                             {
                                 Tag = x.Key,
                                 Count = x.Sum(c => c.Count)
@@ -48,18 +49,31 @@ namespace ArquitectChallenge.Services.Repository.Events
             return _dataContext.Events.Where(x => x.Id == id).FirstOrDefault().ConvertTo<T>();
         }
 
-        public IList<EventByDate> GetEventsGroupedByHour()
+        public IList<GroupEventByHour> GetEventsGroupedByHour(DateTime date)
         {
             var events = _dataContext.Events
-                            .GroupBy(x => x.Timestamp.UnixTimeStampToDateTime())
-                            .Select(x => new EventByDate
-                            {
-                                Count = x.Count(),
-                                Date = x.Key
-                            })
+                            .Where(x => x.Timestamp.UnixTimeStampToDateTime().Date == date.Date)
+                            .OrderBy(x => x.Tag)
+                            .ThenBy(x => x.Timestamp)
+                            .GroupBy(x => x.Tag)
                             .ToList();
 
-            return events;
+            var groupped = new List<GroupEventByHour>();
+            foreach (var tag in events)
+            {
+                var eventsByHour = new int[24];
+                foreach (var eventData in tag.GroupBy(x => x.Timestamp.UnixTimeStampToDateTime().Hour))
+                {
+                    if (eventsByHour.Length >= eventData.Key)
+                    {
+                        eventsByHour[eventData.Key] = eventData.Count();
+                    }
+                }
+
+                groupped.Add(new GroupEventByHour { Tag = tag.Key, EventsByHour = eventsByHour });
+            }
+
+            return groupped;
         }
 
         public override IList<T> GetList<T>()

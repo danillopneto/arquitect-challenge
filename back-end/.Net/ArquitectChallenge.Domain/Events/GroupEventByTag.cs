@@ -1,6 +1,6 @@
 ﻿namespace ArquitectChallenge.Domain.Events
 {
-    public class GroupEventData
+    public class GroupEventByTag
     {
         public int Count { get; set; }
 

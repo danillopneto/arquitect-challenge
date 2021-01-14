@@ -1,13 +1,14 @@
 ﻿using ArquitectChallenge.Domain.Events;
+using System;
 using System.Collections.Generic;
 
 namespace ArquitectChallenge.Interfaces.Services.Events
 {
     public interface IEventService : IBaseService
     {
-        IList<GroupEventData> GetAllGroupedByTag();
+        IList<GroupEventByTag> GetAllGroupedByTag();
 
-        IList<EventByDate> GetEventsGroupedByHour();
+        IList<GroupEventByHour> GetEventsGroupedByHour(DateTime date);
 
         IList<EventData> GetNewestEvents(int lastEventId);
 
