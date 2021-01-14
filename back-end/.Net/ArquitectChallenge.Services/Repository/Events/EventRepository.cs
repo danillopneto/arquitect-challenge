@@ -80,7 +80,7 @@ namespace ArquitectChallenge.Services.Repository.Events
             sql.AppendLine("FROM (SELECT ");
             sql.AppendLine("COUNT(*) AS COUNT, ");
             sql.AppendLine("SUBSTRING_INDEX(TAG, '.', 2) AS FINALTAG, ");
-            sql.AppendLine("UNIX_TIMESTAMP(FROM_UNIXTIME(`TIMESTAMP` / 1000, '%Y-%m-%d %h:00')) AS DIA, ");
+            sql.AppendLine("UNIX_TIMESTAMP(FROM_UNIXTIME(`TIMESTAMP` / 1000, '%Y-%m-%d %H:00')) AS DIA, ");
             sql.AppendLine("TRUE AS ISREGION ");
             sql.AppendLine("FROM EVENTDATA ");
             sql.AppendLine("WHERE ");
@@ -90,7 +90,7 @@ namespace ArquitectChallenge.Services.Repository.Events
             sql.AppendLine("SELECT ");
             sql.AppendLine("COUNT(*) AS COUNT, ");
             sql.AppendLine("TAG AS FINALTAG, ");
-            sql.AppendLine("UNIX_TIMESTAMP(FROM_UNIXTIME(`TIMESTAMP` / 1000, '%Y-%m-%d %h:00')) AS DIA, ");
+            sql.AppendLine("UNIX_TIMESTAMP(FROM_UNIXTIME(`TIMESTAMP` / 1000, '%Y-%m-%d %H:00')) AS DIA, ");
             sql.AppendLine("FALSE AS ISREGION ");
             sql.AppendLine("FROM EVENTDATA ");
             sql.AppendLine("WHERE ");

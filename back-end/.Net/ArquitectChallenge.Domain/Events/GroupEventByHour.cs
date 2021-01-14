@@ -8,6 +8,6 @@
 
         public string Tag { get; set; }
 
-        public long TimeStamp { get; set; }
+        public long Timestamp { get; set; }
     }
 }
