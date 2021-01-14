@@ -108,6 +108,16 @@
             <response code="408">Timeout by getting the events.</response>
             <response code="500">Internal error by getting the events.</response>
         </member>
+        <member name="M:ArquitectChallenge.API.Controllers.EventController.GetNewestEvents(System.Int32)">
+            <summary>
+            Get the newest events based on a id.
+            </summary>
+            <param name="lastEventId">The id of last event.</param>
+            <response code="200">Success by getting the newest events.</response>
+            <response code="408">Timeout by getting the newest events.</response>
+            <response code="500">Internal error by getting the newest events.</response>
+            <returns>The list of newest events.</returns>
+        </member>
         <member name="M:ArquitectChallenge.API.Controllers.EventController.GetNumericEvents">
             <summary>
             Get the numeric events.

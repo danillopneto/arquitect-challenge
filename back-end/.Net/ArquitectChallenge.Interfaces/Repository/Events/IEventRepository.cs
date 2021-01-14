@@ -9,6 +9,8 @@ namespace ArquitectChallenge.Interfaces.Repository.Events
 
         IList<EventByDate> GetEventsGroupedByHour();
 
+        IList<EventData> GetNewestEvents(int lastEventId);
+
         IList<EventData> GetNumericEvents();
     }
 }

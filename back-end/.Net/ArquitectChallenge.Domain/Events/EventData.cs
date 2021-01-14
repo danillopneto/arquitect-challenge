@@ -7,8 +7,6 @@ namespace ArquitectChallenge.Domain.Events
     [Table("EventData")]
     public class EventData : BaseObject
     {
-        private string _valor;
-
         [Column("IsNumeric")]
         public bool IsNumeric { get; private set; }
 
@@ -21,17 +19,7 @@ namespace ArquitectChallenge.Domain.Events
         public double Timestamp { get; set; }
 
         [Column("Valor")]
-        public string Valor
-        {
-            get
-            {
-                return _valor;
-            }
-            set
-            {
-                _valor = value;
-            }
-        }
+        public string Valor { get; set; }
 
         #region " DOMAIN RULES "
 
@@ -43,7 +31,7 @@ namespace ArquitectChallenge.Domain.Events
 
         private void FillIsNumeric()
         {
-            IsNumeric = UtilExtensions.IsNumeric(_valor);
+            IsNumeric = UtilExtensions.IsNumeric(Valor);
         }
 
         /// <summary>

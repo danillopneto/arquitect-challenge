@@ -67,7 +67,16 @@ namespace ArquitectChallenge.Services.Repository.Events
             return _dataContext.Events.AsNoTracking().ToList()
                             .OrderByDescending(x => x.Timestamp)
                             .ThenBy(x => x.Tag)
-                            .Select(UtilExtensions.ConvertTo<T>)                            
+                            .Select(UtilExtensions.ConvertTo<T>)
+                            .ToList();
+        }
+
+        public IList<EventData> GetNewestEvents(int lastEventId)
+        {
+            return _dataContext.Events
+                            .Where(x => x.Id > lastEventId)
+                            .OrderByDescending(x => x.Timestamp)
+                            .ThenBy(x => x.Tag)
                             .ToList();
         }
 

@@ -79,6 +79,36 @@ namespace ArquitectChallenge.API.Controllers
         }
 
         /// <summary>
+        /// Get the newest events based on a id.
+        /// </summary>
+        /// <param name="lastEventId">The id of last event.</param>
+        /// <response code="200">Success by getting the newest events.</response>
+        /// <response code="408">Timeout by getting the newest events.</response>
+        /// <response code="500">Internal error by getting the newest events.</response>
+        /// <returns>The list of newest events.</returns>
+        [HttpGet]
+        [Route("GetNewestEvents")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.RequestTimeout)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public ActionResult GetNewestEvents(int lastEventId)
+        {
+            try
+            {
+                var result = _service.GetNewestEvents(lastEventId);
+                return Ok(result);
+            }
+            catch (TimeoutException)
+            {
+                return StatusCode((int)HttpStatusCode.RequestTimeout);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        /// <summary>
         /// Get the numeric events.
         /// </summary>
         /// <returns>The list of numeric events.</returns>
