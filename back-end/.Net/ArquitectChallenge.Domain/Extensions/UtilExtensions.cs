@@ -18,10 +18,16 @@ namespace ArquitectChallenge.Domain.Utilities
             return (T)Convert.ChangeType(model, typeof(T));
         }
 
+        public static long DateTimeToUnixTimestamp(this DateTime dateTime)
+        {
+            DateTime unixStart = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            long unixTimeStampInTicks = (dateTime.ToLocalTime() - unixStart).Ticks;
+            return unixTimeStampInTicks / TimeSpan.TicksPerSecond;
+        }
+
         public static string FirstTag(this string tag)
         {
-            if (string.IsNullOrWhiteSpace(tag)
-                    || !tag.Contains("."))
+            if (string.IsNullOrWhiteSpace(tag))
             {
                 return null;
             }
@@ -51,7 +57,7 @@ namespace ArquitectChallenge.Domain.Utilities
 
         public static bool IsNumeric(this string value)
         {
-            return Regex.IsMatch(value, "^[0-9]+$");
+            return Regex.IsMatch(value, "^-?[0-9]+$");
         }
 
         public static string SecondTag(this string tag)

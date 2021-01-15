@@ -43,7 +43,7 @@ namespace ArquitectChallenge.Services.Implementation.Events
         {
             /* Preparing object to be saved. */
             var modelPrepared = UtilExtensions.ConvertTo<EventData>(model);
-            modelPrepared.PrepareToSave();
+            modelPrepared.PrepareModel();
 
             /* Casting back to T before saving. */
             return base.Save(modelPrepared.ConvertTo<T>());

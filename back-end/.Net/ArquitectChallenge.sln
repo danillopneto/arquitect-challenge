@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArquitectChallenge.Interfac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArquitectChallenge.Configuration", "ArquitectChallenge.Configuration\ArquitectChallenge.Configuration.csproj", "{637B130C-DD1F-4636-80BE-BBB53F22B044}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArquitectChallenge.Services", "ArquitectChallenge.Services\ArquitectChallenge.Services.csproj", "{9DDAC7E2-37DF-418A-B141-E7909A5F346C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArquitectChallenge.Services", "ArquitectChallenge.Services\ArquitectChallenge.Services.csproj", "{9DDAC7E2-37DF-418A-B141-E7909A5F346C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArquitectChallenge.API", "ArquitectChallenge.API\ArquitectChallenge.API.csproj", "{6164E273-9877-4D26-B54F-B1D863818711}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArquitectChallenge.API", "ArquitectChallenge.API\ArquitectChallenge.API.csproj", "{6164E273-9877-4D26-B54F-B1D863818711}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArquitectChallenge.UnitTests", "ArquitectChallenge.UnitTests\ArquitectChallenge.UnitTests.csproj", "{EE228C9D-A77A-42D3-8586-29B75627C0BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{6164E273-9877-4D26-B54F-B1D863818711}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6164E273-9877-4D26-B54F-B1D863818711}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6164E273-9877-4D26-B54F-B1D863818711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE228C9D-A77A-42D3-8586-29B75627C0BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE228C9D-A77A-42D3-8586-29B75627C0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE228C9D-A77A-42D3-8586-29B75627C0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE228C9D-A77A-42D3-8586-29B75627C0BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

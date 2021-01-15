@@ -23,7 +23,7 @@ namespace ArquitectChallenge.Domain.Events
 
         #region " DOMAIN RULES "
 
-        public void PrepareToSave()
+        public void PrepareModel()
         {
             FillIsNumeric();
             FillStatus();

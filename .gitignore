@@ -12,6 +12,8 @@ back-end/.Net/ArquitectChallenge.Interfaces/bin
 back-end/.Net/ArquitectChallenge.Interfaces/obj
 back-end/.Net/ArquitectChallenge.Services/bin
 back-end/.Net/ArquitectChallenge.Services/obj
+back-end/.Net/ArquitectChallenge.UnitTests/bin
+back-end/.Net/ArquitectChallenge.UnitTests/obj
 front-end/angular/package-lock.json
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
