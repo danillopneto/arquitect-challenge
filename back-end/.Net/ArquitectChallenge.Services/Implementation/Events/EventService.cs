@@ -35,7 +35,8 @@ namespace ArquitectChallenge.Services.Implementation.Events
 
         public IList<NumericEventsData> GetNumericEventsData(DateTime date)
         {
-            return _repository.GetNumericEventsData(date);
+            var groupped = _repository.GetNumericEventsGroupped(date);
+            return groupped.GetNumericEventsData();
         }
 
         public override T Save<T>(T model)

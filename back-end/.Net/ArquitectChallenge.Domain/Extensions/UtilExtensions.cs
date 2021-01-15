@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ArquitectChallenge.Domain.Events;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace ArquitectChallenge.Domain.Utilities
@@ -24,6 +27,26 @@ namespace ArquitectChallenge.Domain.Utilities
             }
 
             return tag.Split(".")[0];
+        }
+
+        public static IList<NumericEventsData> GetNumericEventsData(this IList<IGrouping<string, EventData>> groupped)
+        {
+            var grouppedByNumber = new List<NumericEventsData>();
+            foreach (var tag in groupped)
+            {
+                var group = new NumericEventsData
+                {
+                    Start = Convert.ToInt32(tag.First(x => x.Timestamp == tag.Min(t => t.Timestamp)).Valor),
+                    Maximum = tag.Max(x => Convert.ToInt32(x.Valor)),
+                    Minimum = tag.Min(x => Convert.ToInt32(x.Valor)),
+                    End = Convert.ToInt32(tag.First(x => x.Timestamp == tag.Max(t => t.Timestamp)).Valor),
+                    Tag = tag.Key,
+                };
+
+                grouppedByNumber.Add(group);
+            }
+
+            return grouppedByNumber;
         }
 
         public static bool IsNumeric(this string value)

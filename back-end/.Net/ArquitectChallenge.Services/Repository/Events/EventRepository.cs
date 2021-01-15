@@ -18,10 +18,9 @@ namespace ArquitectChallenge.Services.Repository.Events
 
         public IList<GroupEventByTag> GetAllGroupedByTag()
         {
-            var groupped = _dataContext
-                                .SqlQuery<GroupEventByTag>(GetSqlGrouppedByTag().ToString())
-                                .ToList();
-            return groupped.OrderBy(x => x.Tag).ToList();
+            return _dataContext
+                        .SqlQuery<GroupEventByTag>(GetSqlGrouppedByTag().ToString())
+                        .ToList();
         }
 
         public override T GetById<T>(int id)
@@ -31,28 +30,27 @@ namespace ArquitectChallenge.Services.Repository.Events
 
         public IList<GroupEventByHour> GetEventsGroupedByHour(DateTime date)
         {
-            var groupped = _dataContext
-                            .SqlQuery<GroupEventByHour>(GetSqlGrouppedByHour(date).ToString())
-                            .ToList();
-            return groupped;
+            return _dataContext
+                        .SqlQuery<GroupEventByHour>(GetSqlGrouppedByHour(date).ToString())
+                        .ToList();
         }
 
         public override IList<T> GetList<T>()
         {
             return _dataContext.Events.AsNoTracking().ToList()
-                            .OrderByDescending(x => x.Timestamp)
-                            .ThenBy(x => x.Tag)
-                            .Select(UtilExtensions.ConvertTo<T>)
-                            .ToList();
+                        .OrderByDescending(x => x.Timestamp)
+                        .ThenBy(x => x.Tag)
+                        .Select(UtilExtensions.ConvertTo<T>)
+                        .ToList();
         }
 
         public IList<EventData> GetNewestEvents(int lastEventId)
         {
             return _dataContext.Events
-                            .Where(x => x.Id > lastEventId)
-                            .OrderByDescending(x => x.Timestamp)
-                            .ThenBy(x => x.Tag)
-                            .ToList();
+                        .Where(x => x.Id > lastEventId)
+                        .OrderByDescending(x => x.Timestamp)
+                        .ThenBy(x => x.Tag)
+                        .ToList();
         }
 
         public IList<EventData> GetNumericEvents()
@@ -62,30 +60,13 @@ namespace ArquitectChallenge.Services.Repository.Events
                         .ToList();
         }
 
-        public IList<NumericEventsData> GetNumericEventsData(DateTime date)
+        public IList<IGrouping<string, EventData>> GetNumericEventsGroupped(DateTime date)
         {
-            var groupped = _dataContext.Events
-                                .Where(x => x.IsNumeric
-                                        && x.Timestamp.UnixTimeStampToDateTime().Date == date.Date)
-                                .GroupBy(x => x.Tag)
-                                .ToList();
-
-            var grouppedByNumber = new List<NumericEventsData>();
-            foreach (var tag in groupped)
-            {
-                var group = new NumericEventsData
-                {
-                    Start = Convert.ToInt32(tag.First(x => x.Timestamp == tag.Min(t => t.Timestamp)).Valor),
-                    Maximum = tag.Max(x => Convert.ToInt32(x.Valor)),
-                    Minimum = tag.Min(x => Convert.ToInt32(x.Valor)),
-                    End = Convert.ToInt32(tag.First(x => x.Timestamp == tag.Max(t => t.Timestamp)).Valor),
-                    Tag = tag.Key,
-                };
-
-                grouppedByNumber.Add(group);
-            }
-
-            return grouppedByNumber;
+            return _dataContext.Events
+                        .Where(x => x.IsNumeric
+                                && x.Timestamp.UnixTimeStampToDateTime().Date == date.Date)
+                        .GroupBy(x => x.Tag)
+                        .ToList();
         }
 
         protected override void UpdateItem(EventData currentItem, EventData updatedItem)

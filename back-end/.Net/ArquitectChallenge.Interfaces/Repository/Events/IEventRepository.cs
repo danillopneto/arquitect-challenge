@@ -1,6 +1,7 @@
 ﻿using ArquitectChallenge.Domain.Events;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ArquitectChallenge.Interfaces.Repository.Events
 {
@@ -13,7 +14,7 @@ namespace ArquitectChallenge.Interfaces.Repository.Events
         IList<EventData> GetNewestEvents(int lastEventId);
 
         IList<EventData> GetNumericEvents();
-        
-        IList<NumericEventsData> GetNumericEventsData(DateTime date);
+
+        IList<IGrouping<string, EventData>> GetNumericEventsGroupped(DateTime date);
     }
 }
