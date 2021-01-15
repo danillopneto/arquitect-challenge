@@ -59,7 +59,7 @@ Descrição:
     * Um gráfico apenas para eventos com valor numérico.
     > Eventos numéricos são obtidos pelas APIs `http://[servidor]/api/v1/Event/GetNumericEvents` ou `http://[servidor]/api/v1/Event/GetNumericEventsData`
     > O gráfico a ser utilizado seria similar ao gráfico financeiro/cotações, 1 para cada sensor, como no exemplo abaixo. Onde seriam apresentados todos os sensores com os seguintes dados: *valor inicial, valor final, valor máxima e valor mínimo*
-    ![Numéricos](/front-end/screenshots/events_hour.png?raw=true "Numéricos")
+    ![Numéricos](/front-end/screenshots/events_numeric.png?raw=true "Numéricos")
 
 * Para seu cliente, é muito importante que ele saiba o número de eventos que aconteceram por região e por sensor. Como no exemplo abaixo:
     * Região sudeste e sul ambas com dois sensores (sensor01 e sensor02):
