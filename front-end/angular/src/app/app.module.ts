@@ -32,12 +32,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTreeModule } from '@angular/material/tree';
@@ -74,12 +72,10 @@ import { ChartsModule } from 'ng2-charts';
     MatCardModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatFormFieldModule,
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule,
     MatTreeModule,
     MatIconModule,
     MatRadioModule,
@@ -88,7 +84,6 @@ import { ChartsModule } from 'ng2-charts';
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' },
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
   ],
   bootstrap: [AppComponent]
 })

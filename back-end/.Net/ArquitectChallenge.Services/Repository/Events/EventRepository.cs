@@ -89,7 +89,7 @@ namespace ArquitectChallenge.Services.Repository.Events
             sql.AppendLine("SUBSTRING_INDEX(TAG, '.', 2) AS FINALTAG, ");
             sql.AppendLine("UNIX_TIMESTAMP(FROM_UNIXTIME(`TIMESTAMP` / 1000, '%Y-%m-%d %H:00')) AS DIA, ");
             sql.AppendLine("TRUE AS ISREGION ");
-            sql.AppendLine("FROM EVENTDATA ");
+            sql.AppendLine("FROM `EventData` ");
             sql.AppendLine("WHERE ");
             sql.AppendFormat("	FROM_UNIXTIME(`TIMESTAMP` / 1000, '%Y-%m-%d') = '{0}' ", date.ToString("yyyy-MM-dd"));
             sql.AppendLine("GROUP BY FINALTAG, DIA ");
@@ -99,7 +99,7 @@ namespace ArquitectChallenge.Services.Repository.Events
             sql.AppendLine("TAG AS FINALTAG, ");
             sql.AppendLine("UNIX_TIMESTAMP(FROM_UNIXTIME(`TIMESTAMP` / 1000, '%Y-%m-%d %H:00')) AS DIA, ");
             sql.AppendLine("FALSE AS ISREGION ");
-            sql.AppendLine("FROM EVENTDATA ");
+            sql.AppendLine("FROM `EventData` ");
             sql.AppendLine("WHERE ");
             sql.AppendFormat("	FROM_UNIXTIME(`TIMESTAMP` / 1000, '%Y-%m-%d') = '{0}' ", date.ToString("yyyy-MM-dd"));
             sql.AppendLine("GROUP BY TAG, DIA) BYHOUR ");
@@ -113,19 +113,19 @@ namespace ArquitectChallenge.Services.Repository.Events
             sql.AppendLine("SELECT COUNT, FINALTAG AS TAG FROM(SELECT ");
             sql.AppendLine("COUNT(*) AS COUNT, ");
             sql.AppendLine("SUBSTRING_INDEX(TAG, '.', 1) AS FINALTAG ");
-            sql.AppendLine("FROM EVENTDATA ");
+            sql.AppendLine("FROM `EventData` ");
             sql.AppendLine("GROUP BY FINALTAG ");
             sql.AppendLine("UNION ");
             sql.AppendLine("SELECT ");
             sql.AppendLine("COUNT(*) AS COUNT, ");
             sql.AppendLine("SUBSTRING_INDEX(TAG, '.', 2) AS FINALTAG ");
-            sql.AppendLine("FROM EVENTDATA ");
+            sql.AppendLine("FROM `EventData` ");
             sql.AppendLine("GROUP BY FINALTAG) PARENTTAGS ");
             sql.AppendLine("UNION ");
             sql.AppendLine("SELECT ");
             sql.AppendLine("COUNT(*) AS COUNT, ");
             sql.AppendLine("TAG ");
-            sql.AppendLine("FROM EVENTDATA TAG ");
+            sql.AppendLine("FROM `EventData` TAG ");
             sql.AppendLine("GROUP BY TAG");
             return sql;
         }
