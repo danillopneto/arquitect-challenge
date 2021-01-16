@@ -91,6 +91,7 @@ Em caso de dúvida, entre em contato com o responsável pelo seu processo seleti
     
 ## Como utilizar
 > **Requisito:** É necessário ter o docker instalado em seu sistema operacional (Linux, Windows ou Mac)
+> **Windows:** Caso esteja utilizando o Windows, certifique-se de que o IIS ou outra aplicação não esteja utilizando a porta 80 ou então altere a porta que será utilizada nos arquivos *docker-compose.yaml* e *front-end/angular/environments/environment/prod.ts*.
 
 ### Disponibilizar front-end e back-end
 Rode o comando (apontando a pasta local do arquivo):  
