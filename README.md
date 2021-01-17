@@ -89,7 +89,7 @@ Em caso de dúvida, entre em contato com o responsável pelo seu processo seleti
         * EntityFramework como ORM e banco de dados MySql.    
     - [x] Front-end em Angular 11 + Material Design + Charts.js
     
-## Como utilizar
+## Como compilar/utilizar
 > **Requisito:** É necessário ter o docker instalado em seu sistema operacional (Linux, Windows ou Mac)
 > **Windows:** Caso esteja utilizando o Windows, certifique-se de que o IIS ou outra aplicação não esteja utilizando a porta 80 ou então altere a porta que será utilizada nos arquivos *docker-compose.yaml* e *front-end/angular/environments/environment/prod.ts*.
 
@@ -102,3 +102,14 @@ Rode o comando (apontando a pasta local do arquivo):
 
 #### Para parar a execução no console (executando no modo 'attached'):  
 - <kbd>Crtl</kbd> + <kbd>C</kbd>
+ 
+#### Para parar a execução no console (executando no modo 'attached'):  
+- <kbd>Crtl</kbd> + <kbd>C</kbd>
+ 
+## Images e deploy
+
+#### As imagens docker foram disponibilizadas no repositório pessoal (públicas):
+- `https://hub.docker.com/u/danillopneto`
+
+#### A aplicação também está publicada na Azure através do link abaixo:
+- `https://danillopneto-challenge.azurewebsites.net/`
