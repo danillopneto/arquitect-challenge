@@ -1,0 +1,41 @@
+version: "3.5"
+
+services:
+  nginx:
+    depends_on:
+      - client
+      - main-api
+    restart: always # because it is routing traffic to our entire app
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "80:80"
+
+  db:
+    image: mysql:8.0.0
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: arquitectchallenge
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbuserpassword
+    volumes:
+      - dbdata:/var/lib/mysql
+    restart: always
+    ports:
+      - "0:3306"
+
+  main-api:
+    depends_on:
+      - db
+    build:
+      context: ./back-end/.Net/
+      dockerfile: ./ArquitectChallenge.API/Dockerfile
+    restart: always
+
+  client:
+    build:
+      context: ./front-end/angular
+      dockerfile: Dockerfile
+volumes:
+  dbdata:
